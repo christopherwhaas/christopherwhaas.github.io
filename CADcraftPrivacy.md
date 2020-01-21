@@ -1,8 +1,6 @@
-<!DOCTYPE html>
+
 <html>
-<head>
-	<title>CADcraft Privacy Policy</title>
-</head>
+
 <body>
 	<h2>Privacy Policy</h2>
     <p>Your privacy is important to us. It is Christopher Haas's policy to respect your privacy regarding any information we may collect from you across our App, CADcraft.</p>

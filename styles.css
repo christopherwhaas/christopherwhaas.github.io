@@ -16,14 +16,17 @@ a:hover{
 	color: white;
 }
 
+#headerImage{
+	padding-top: 20px
+}
+
 #header{
 	
 	
-	background-color: black; 
+	background-color: #343434; 
 	padding-top: 1px;
 	padding-bottom: 1px;
-	opacity: 0.6;
-	color: white;
+	color: #F5F5F5;
 	text-align: center;
 	
 }

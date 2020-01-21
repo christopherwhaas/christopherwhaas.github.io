@@ -1,0 +1,36 @@
+body{
+	font-family: Avenir, Arial, sans-serif;
+	background-color: gray;
+}
+
+h1{
+	font-size: 350%;
+
+	}
+
+a{
+	color:black;
+}
+
+a:hover{
+	color: white;
+}
+
+#header{
+	
+	
+	background-color: black; 
+	padding-top: 1px;
+	padding-bottom: 1px;
+	opacity: 0.6;
+	color: white;
+	text-align: center;
+	
+}
+
+#main{
+
+
+	text-align: center;
+
+}

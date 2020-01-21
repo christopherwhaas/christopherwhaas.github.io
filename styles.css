@@ -1,6 +1,12 @@
 body{
 	font-family: Avenir, Arial, sans-serif;
 	background-color: gray;
+	margin:0;
+	padding:0;
+}
+
+*{
+
 }
 
 h1{
@@ -9,19 +15,23 @@ h1{
 	}
 
 a{
+	
 	color:black;
+	text-decoration: none;
 }
 
 a:hover{
 	color: white;
 }
 
+
+
 #headerImage{
 	padding-top: 20px
 }
 
 #header{
-	
+	display: block;
 	
 	background-color: #343434; 
 	padding-top: 1px;
@@ -35,5 +45,20 @@ a:hover{
 
 
 	text-align: center;
+	margin:10;
+	padding:10;
 
+}
+
+#list{
+
+	font-size: 175%;
+	background-color: #343434;
+	text-align: center;
+	margin-left:40%;
+	margin-right: 40%;
+	padding-top: 3%;
+	padding-bottom: 3%;
+
+	
 }

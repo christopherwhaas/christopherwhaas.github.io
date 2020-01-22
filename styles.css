@@ -1,6 +1,6 @@
 body{
 	font-family: Avenir, Arial, sans-serif;
-	background-color: gray;
+	background-color: #C2C2C2;
 	margin:0;
 	padding:0;
 }
@@ -52,6 +52,7 @@ a:hover{
 
 #list{
 
+	color: #F5F5F5;
 	font-size: 175%;
 	background-color: #343434;
 	text-align: center;

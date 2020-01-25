@@ -1,59 +1,55 @@
 body{
-	font-family: Avenir, Arial, sans-serif;
+	font-family: Avenir, Arial, sans-serif !important;
 	background-color: #FBFBFB;
 	margin:0;
 	padding:0;
 }
 
-*{
-
+h1{
+	color: #FBFBFB;
 }
 
-h1{
-	font-size: 350%;
+.jumbotron {
 
-	}
+    border-radius: 0 !important;
+
+}
 
 a{
 	
 	color:#FBFBFB;
 	text-decoration: none;
+
 }
 
 a:hover{
+
 	color: black;
+	text-decoration:none;
 }
 
 
 
 #headerImage{
-	padding-top: 20px
-}
 
-#header{
-	display: block;
-	
-	background-color: #343434; 
-	padding-top: 1px;
-	padding-bottom: 1px;
-	color: #FBFBFB;
-	text-align: center;
+	padding-top: 1%
+	padding-bottom:3%;
+	margin:2%;
 	
 }
 
-#main{
 
+.main{
 
 	text-align: center;
-	margin:10;
+	margin:3%;
 	padding:10;
 
 }
 
-#list{
+.list{
 
 	color: #FBFBFB;
-	font-size: 175%;
 	background-color: #343434;
 	text-align: center;
 	margin-left:40%;

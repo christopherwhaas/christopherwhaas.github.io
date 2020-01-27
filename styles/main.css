@@ -96,3 +96,36 @@ h1{
 	color:white;
 
 }
+
+.col-proj-title{
+	text-align: center;
+	margin:4%;
+}
+
+.col-proj-desc{
+	border-radius: 10px;
+	text-align: center;
+	margin:2%;
+	padding:1%;
+	background-color: #ededed;
+}
+
+.col-projBlock{
+	border-radius: 10px;
+	text-align: center;
+	margin:2%;
+	padding:1%;
+	background-color: #ededed;
+	min-height: 100px
+}
+
+.col-projBlock a{
+	color:black;
+}
+
+.col-projBlock a:hover {
+	opacity: 0.3;
+	text-decoration: none;
+	color:white;
+
+}

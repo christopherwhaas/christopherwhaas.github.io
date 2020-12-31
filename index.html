@@ -1,85 +1,234 @@
-<!DOCTYPE html>
-<html>
+---
+layout: default
+title: Home
+---
+<div class="container">
 
-<head>
-	<title>Home</title>
+  <div id="home">
+    <div class="content my-auto" >
+      <h5 class="green" data-aos="fade-down" data-aos-duration="1500">Hello world, my name is </h5>
+      <div data-aos="fade-up" data-aos-duration="2000">
+        <h1 class="px-sm-5 pt-3" >Christopher Haas.</h1>
+      <h1 class="">I like to <span class="red">build</span> things.</h1>
+      <p class="about">I am a Full-Stack Software Engineer and Web Developer studying Information Systems and Civil & Environmental Engineering at Carnegie Mellon University.</p>
+      <br><br>
+      <a href="mailto:chaas@andrew.cmu.edu" class="btn btn-outline-success" ><h5>SAY HELLO</h5></a>
+      </div>
+      
+    </div>
+    
+  </div>
+  <div id="bio" >
+    <div class="content">
+      <div data-aos="fade-up" data-aos-duration="800">
+        <h5 class="section-title" ><span class="green ">01.</span> BIO </h5>
+        <hr>
+      </div>
+      
+      <div class="row">
+        <div class="col-12 col-lg-5 order-lg-1 text-center mb-4" data-aos="fade-up" data-aos-duration="1000">
+          
+          <img src="assets/images/aboutChris.png" width="100%" class="aboutImg img-responsive rounded mx-auto my-auto">
 
-	<meta lang="en-us">
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<link rel="stylesheet" href="bootstrap-4.4.1-dist/css/bootstrap.min.css">
-	<link rel="stylesheet" type="text/css" href="styles/main.css">
-	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-		integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
-		crossorigin="anonymous"></script>
-	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-		integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-		crossorigin="anonymous"></script>
-	<script src="bootstrap-4.4.1-dist/js/bootstrap.min.js"></script>
+        </div>
+        <div class="col-12 col-lg-7 order-lg-0" data-aos="fade-up" data-aos-duration="1000">
+          <p>Hello! My name is Chris, and I am a student-athlete at <a href="https://cmu.edu"  target="_blank">Carnegie Mellon University</a>. I am
+            currently pursuing a dual degree in Information Systems and Civil & Environmental
+            Engineering with a minor in Business Administration graduating in May of 2021. I was elected as one of four  
+            senior captians of Carnegie Mellon's Varsity football team and I currently hold above 
+            a 3.4 GPA. I am the Cheif Technology Officer and a founding memeber of <a href="https://www.oldsaltcoffee.com" target="_blank">Old Salt Coffee Company</a>,
+            which has been in operation since September 2020. </p>
+            <p>If I'm not in class, you can find me at a rock climbing gym, on a hike, or at a
+            local coffee shop working on various projects. I love the outdoors and try to get out as
+            much as possible. That involves anything from snowboarding to scuba diving, and anywhere in 
+            between.</p>
+            <p>Here is what I've been working with lately:</p>
+            <div class="row mx-2">
+              <ul class="col-6">
+                <li>Ruby on Rails</li>
+                <li>HTML & (S)CSS</li>
+                <li>Javascript</li>
+                <li>Liquid</li>
+              </ul>
+              <ul class="col-6">
+                <li>Swift</li>
+                <li>Python</li>
+                <li>C</li>
+                <li>PostgreSQL</li>
+              </ul>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div id="experience">
+    <div class="content" data-aos="fade-up" data-aos-duration="1000">
+      <h5  class="section-title"><span class="green">02.</span> EXPERIENCE</h5>
+      <hr>
+     <div class="my-4" >
+
+            
+        <section class="wrapper" >
+          <ul class="tabs">
+            {% for exp in site.work%}
+            <li {%if forloop.first %} class="active" {%endif%}> {{exp.short}}</li>
+            {%endfor%}
+          </ul>
+      
+          <ul class="tab__content">
+            {% for exp in site.work%}
+            <li {%if forloop.first %} class="active" {%endif%}>
+              <div class="content__wrapper">
+                <h3>{{exp.name}} <a href="{{exp.link}}">@{{exp.company}}</a></h3>
+                <h6>{{exp.start}} - {{exp.end}} </h6>
+                <div>
+                  <p> {{ exp.content | markdownify }}</p>
+                </div>
+              </div>
+            </li>
+            {%endfor%}
+          </ul>
+        </section>
+      </div>
+    </div>
+  </div>
 
 
-</head>
+  
 
-<body>
-	<div class="header">
-		<div class="jumbotron text-center bg-dark">
-			<img src="resources/profileImage.png" id="headerImage" alt="A picture of Chris" height="220" width="220">
-			<br>
-			<h1><b>Christopher Haas</b></h1>
-		</div>
-	</div>
+  <div id="projects">
+    <div class="content" data-aos="fade-up" data-aos-duration="1000">
+      <h5  class="section-title"><span class="green">03.</span> PROJECTS</h5>
+      <hr>
+      <div class="my-5">
+       
+      {%for feature in site.featured%}
+        {% assign mod = forloop.index | modulo: 2 %}
+        {% if mod != 0 %}
+          <div class="feature-card my-4" data-aos="fade-up" data-aos-duration="1000">
+            
+            <div class="feature-desc my-auto">
+              <div class="feature-wrapper">
+                <div class="small-feature"><h6>Featured Project</h6></div>
+                <div class="feature-title"><h3 >{{feature.title}}</h3></div>
+                <div class="feature-content"><p>{{feature.content}}</p></div>
+                <div class="feature-skills">
+                  <table class="featured-table">
+                    <tr>
+                      {% for skill in feature.skills%}
+                      <td class="red">{{skill}}</td>
+                      {%endfor%}
+                      
+                    </tr>
+                  </table>
+                    
+                  </div>
+                
+                <div class="feature-link"><a href="{{feature.link}}"><i class="fas fa-external-link-square-alt"></i></a></div>
+              </div>
+            </div>
+             
 
+            <div class="video-wrapper my-auto">{{feature.vid}}</div>
+          </div>
+        {% else %}
+            <div class="feature-card my-4" data-aos="fade-up" data-aos-duration="1000">
+          
+          <div class="feature-desc-left my-auto">
+            <div class="feature-wrapper">
+              <div class="small-feature"><h6>Featured Project</h6></div>
+              <div class="feature-title"><h3 >{{feature.title}}</h3></div>
+              <div class="feature-content"><p>{{feature.content}}</p></div>
+              <div class="feature-skills">
+                <table class="featured-table-left">
+                  <tr>
+                    {% for skill in feature.skills%}
+                    <td class="red">{{skill}}</td>
+                    {%endfor%}
+                    
+                  </tr>
+                </table>
+                  
+                </div>
+              
+              <div class="feature-link"><a href="{{feature.link}}" target="_blank"><i class="fas fa-external-link-square-alt"></i></a></div>
+            </div>
+            
+          </div>
 
-	<div class="container">
-		<div class="row justify-content-center align-items-center">
-			<div class="col-sm-3 col-xs-3 col-referenceBlock">
-				<a href="about">
-					<img src="resources/about.png" width="50" height="50">
-					<h5><b>About Chris</b></h5>
-					<p>Learn a little about me.</p>
-				</a>
-			</div>
-			<div class="col-sm-3 col-xs-3 col-referenceBlock">
-				<a href="Projects/index">
-					<img src="resources/project.png" width="50" height="50">
-					<h5><b>Projects</b></h5>
-					<p>See what I've been working on.</p>
-				</a>
-			</div>
-			<div class="col-sm-3 col-xs-3 col-referenceBlock">
-				<a href="Resume/index">
-					<img src="resources/resume.png" width="50" height="50">
-					<h5><b>Resume</b></h5>
-					<p>See some relevant experiences.</p>
-				</a>
-			</div>
+          <div class="video-wrapper-left my-auto">{{feature.vid}}</div>
 
-		</div>
+     
+          
+        </div>
+        {% endif %}
+      {%endfor%}
 
-	</div>
+        
+      </div>
+      <div data-aos="fade-up" data-aos-duration="1000">
+        <h4 class="section-title text-center">Other Projects</h4>
+        <hr>
+        <div class="container-fluid">
+          <div class="row justify-content-start">
+  
+            {% for project in site.projects%}
+  
+            <div class="project-col col-12 col-lg-6 col-xl-4 " data-aos="fade-up" data-aos-duration="1000">
+              <div class="project">
+                <div class="icons">
+                  <div class="row mx-1 my-2">
+                    <div class="col-4 text-center"><i class="fas fa-code-branch project-icon"></i></div>
+                    <div class="col-5"></div>
+                    <div class="col-3"><a href="{{project.link}}"  target="_blank"><i class="fas fa-external-link-square-alt"></i></a></div>
+                  </div>
+                </div>
+                <div class="header">
+                  <h3>{{project.title}}</h3>
+                </div>
+                <div class="body">
+                  <p>
+                    {{project.content | markdownify }}
+                  </p>
+                  <br><br>
+                </div>
+                <div class="foot">
+                  <table class="project-table">
+                    <tr>
+                      {% for skill in project.skills%}
+                      <td class="red">{{skill}}</td>
+                      {%endfor%}
+                      <td></td>
+                      
+                    </tr>
+                  </table>
+                </div>
+              </div>
+            </div>
+  
+            {% endfor %}
+  
+          </div>
+  
+        </div>
+      </div>
+      
+        
+     </div>
+  
+  </div>
+  
+  <div id="contact">
+    <div class="content about  mx-auto" data-aos="fade-up" data-aos-duration="1000">
+      <h5  class="section-title"><span class="green">04.</span> CONTACT</h5>
+      <hr>
+      <p class="text-center contactDesc">I am currently on the hunt for Software Engineering roles. Whether you have a question about a project, are actively hiring, or just want to say hi, please feel free to reach out! </p>
+      <br>
+      <div class="text-center"> <a href="mailto:chaas@andrew.cmu.edu" class="btn btn-outline-success" ><h5>SAY HELLO</h5></a></div>
+     
+     </div>
+  
+  </div>
 
-
-
-	<div class="footer">
-		<div class="jumbotron text-center" style="margin-bottom:0">
-			<div class="container">
-				<div class="row justify-content-center">
-					<span class="shareIMG"><a href="https://www.instagram.com/christopherhaas"><img
-								src="resources/instagram.png" width="30" height="30" alt="Instagram logo"></a></span>
-					<span class="shareIMG"><a href="https://www.linkedin.com/in/christopherwhaas/"><img
-								src="resources/linkedin.png" width="30" height="30" alt="Linkedin logo"></a></span>
-					<span class="shareIMG"><a href="https://github.com/christopherwhaas"><img src="resources/github.png"
-								width="30" height="30" alt="Github logo"></a></span>
-				</div>
-				<div class="row justify-content-center">
-					<a href="privacy">Privacy Policy</a>
-				</div>
-			</div>
-		</div>
-	</div>
-
-
-
-</body>
-
-</html>
+</div>

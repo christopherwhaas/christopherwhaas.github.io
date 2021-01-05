@@ -262,11 +262,11 @@ a:active{
 
  
 
- #bio ul{
+ #bio ul, .exp-desc ul{
    list-style: none;
  }
 
- #bio li::before{
+ #bio li::before, .exp-desc li::before{
    
    content: "\25B7";
    color: #EDD566;
@@ -274,11 +274,16 @@ a:active{
    font-size: 80%;
    
  }
- #bio li{
+ #bio li, .exp-desc li{
    font-family: "Roboto Mono", monospace;
    font-size: 90%;
  }
 
+ // Experience
+
+ .exp-desc{
+   text-align: left;
+ }
  //Project
 
   //Featured Projects

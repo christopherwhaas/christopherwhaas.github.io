@@ -100,6 +100,28 @@ p{
 }
 
 
+
+.footer-table {
+  display: none;
+  border-collapse: collapse;
+  margin: 5% auto;
+  width: 85%;
+  
+  // padding: 12px 0;
+}
+
+.cell{
+  display: inline-flex;
+  width: 25%;
+  // 
+}
+
+.cell div{
+  margin: 0 auto;
+}
+
+
+
 @media only screen and (max-width: 680px) {
   .left-buffer, .right-bar{
     display: none;
@@ -108,6 +130,10 @@ p{
   .main{
     width: 100%;
     left: 0;
+  }
+
+  .footer-table{
+    display: table;
   }
 }
 
@@ -672,3 +698,12 @@ a:active{
 .footer a h6{
   font-size: 80%;
 }
+
+
+.footer-table a{
+  color:#D8D8D8
+}
+.footer-table a:hover{
+  color: #FF2164;
+}
+

@@ -263,14 +263,13 @@ a:active{
  
 
  #bio ul, .exp-desc ul{
-   list-style: none;
+   list-style-type: none;
  }
 
  #bio li::before, .exp-desc li::before{
-   
+  margin: 0px 10px 0px -20px;
    content: "\25B7";
    color: #EDD566;
-   padding-right: 10px;
    font-size: 80%;
    
  }
@@ -284,6 +283,8 @@ a:active{
  .exp-desc{
    text-align: left;
    padding: 0;
+   font-size: 110%;
+
    
  }
 
@@ -295,9 +296,9 @@ a:active{
  }
 
  .exp-desc ul li{
-   font-size: 110%;
+   
    margin: 10px 0;
-  list-style-position: outside !important;
+    list-style-position: outside;
  }
  //Project
 
@@ -599,10 +600,11 @@ a:active{
 
 
 .tabs{
+  margin: 0 auto;
   padding-left: 0;
 	display: table;
 	table-layout: fixed;
-	width: 100%;
+	width: 80%;
 	-webkit-transform: translateY(5px);
 	transform: translateY(5px);
 	
@@ -668,9 +670,10 @@ a:active{
 }
 
 .tab__content{
-  background-color: #040709;
+  margin: 10px auto;
+  background-color: #04070970;
 	position: relative;
-	width: 100%;
+	width: 80%;
 	border-radius: 5px;
 	
 	>li{
@@ -705,6 +708,14 @@ a:active{
 		height: auto;
 		border-radius: 5px;
 	}
+}
+
+@media only screen and (max-width:770px){
+  .tabs, .tab__content{
+    width: 100%;
+  }
+
+  
 }
 
 

@@ -5,6 +5,8 @@ $(document).ready(function(){
 	var tabWrapper = $(".tab__content");
 	var activeTab = tabWrapper.find(".active");
 	var activeTabHeight = activeTab.outerHeight();
+
+
 	
 	// Show tab on page load
 	activeTab.show();
@@ -51,6 +53,11 @@ $(document).ready(function(){
 				
 			});
 		});
+	});
+
+	$(window).resize(function() {
+		activeTabHeight = activeTab.outerHeight();
+		tabWrapper.height = activeTab.outerHeight();
 	});
 	
 	// Variables

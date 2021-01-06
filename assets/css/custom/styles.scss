@@ -274,7 +274,7 @@ a:active{
    font-size: 80%;
    
  }
- #bio li, .exp-desc li{
+ #bio li{
    font-family: "Roboto Mono", monospace;
    font-size: 90%;
  }
@@ -283,6 +283,21 @@ a:active{
 
  .exp-desc{
    text-align: left;
+   padding: 0;
+   
+ }
+
+ @media only screen and (min-width: 1200px){
+  .exp-desc{
+    padding: 0 10%;
+    
+  }
+ }
+
+ .exp-desc ul li{
+   font-size: 110%;
+   margin: 10px 0;
+  list-style-position: outside !important;
  }
  //Project
 

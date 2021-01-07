@@ -478,6 +478,12 @@ a:active{
  .project-col{
   padding: 5px;
  }
+
+ @media only screen and (min-width: 1200px){
+  .project{
+    min-height: 437px !important;
+   }
+ }
  .project{
    position: relative;
    padding: 10px 20px;

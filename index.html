@@ -181,7 +181,7 @@ title: Chris' Portfolio
                   <div class="row mx-1 my-2">
                     <div class="col-4"><i class="fas fa-code-branch project-icon"></i></div>
                     <div class="col-5"></div>
-                    <div class="col-3"><a href="{{project.link}}"  target="_blank"><i class="fas fa-external-link-square-alt"></i></a></div>
+                    <div class="col-3">{% if project.link != nil %}<a href="{{project.link}}"  target="_blank"><i class="fas fa-external-link-square-alt"></i></a>{%endif%}</div>
                   </div>
                 </div>
                 <div class="header">

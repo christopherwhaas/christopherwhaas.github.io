@@ -98,66 +98,76 @@ title: Chris' Portfolio
   
 
   <div id="projects">
-    <div class="content" data-aos="fade-up" data-aos-duration="1000">
-      <h5  class="section-title"><span class="green">03.</span> PROJECTS</h5>
-      <hr>
-      <div class="my-5">
+    <div class="content">
+      <div data-aos="fade-up" data-aos-duration="1000">
+        <h5  class="section-title"><span class="green">03.</span> PROJECTS</h5>
+        <hr>
+      </div>
+      
+      <div class="featured">
        
       {%for feature in site.featured%}
         {% assign mod = forloop.index | modulo: 2 %}
         {% if mod != 0 %}
-          <div class="feature-card my-4" data-aos="fade-up" data-aos-duration="1000">
-            
-            <div class="feature-desc my-auto">
-              <div class="feature-wrapper">
-                <div class="small-feature"><h6>Featured Project</h6></div>
-                <div class="feature-title"><h3 >{{feature.title}}</h3></div>
-                <div class="feature-content"><p>{{feature.content}}</p></div>
-                <div class="feature-skills">
-                  <table class="featured-table">
-                    <tr>
-                      {% for skill in feature.skills%}
-                      <td class="red">{{skill}}</td>
-                      {%endfor%}
-                      
-                    </tr>
-                  </table>
-                    
-                  </div>
-                
-                <div class="feature-link"><a href="{{feature.link}}"><i class="fas fa-external-link-square-alt"></i></a></div>
-              </div>
-            </div>
-             
+          <div class="feature-card" data-aos="fade-up" data-aos-duration="1000">
+            {{feature.vid}}
 
-            <div class="video-wrapper my-auto">{{feature.vid}}</div>
-          </div>
-        {% else %}
-            <div class="feature-card my-4" data-aos="fade-up" data-aos-duration="1000">
-          
-          <div class="feature-desc-left my-auto">
-            <div class="feature-wrapper">
-              <div class="small-feature"><h6>Featured Project</h6></div>
-              <div class="feature-title"><h3 >{{feature.title}}</h3></div>
-              <div class="feature-content"><p>{{feature.content}}</p></div>
-              <div class="feature-skills">
-                <table class="featured-table-left">
-                  <tr>
-                    {% for skill in feature.skills%}
-                    <td class="red">{{skill}}</td>
-                    {%endfor%}
+            <div class="feature-desc">
+                <div class="feature-wrapper">
+                  <div class="feature-background"></div>
+                  <div class="feature-main">
+                    <div class="small-feature"><h6>Featured Project</h6></div>
+                    <div class="feature-title"><h3 >{{feature.title}}</h3></div>
+                    <div class="feature-content"><p>{{feature.content}}</p></div>
+                    <div class="feature-skills">
+                      <table class="featured-table">
+                        <tr>
+                          {% for skill in feature.skills%}
+                          <td class="red">{{skill}}</td>
+                          {%endfor%}
+                        </tr>
+                      </table>
+                        
+                      </div>
                     
-                  </tr>
-                </table>
+                    <div class="feature-link"><a href="{{feature.link}}"><i class="fas fa-external-link-square-alt"></i></a></div>
+                  
+                  </div>
                   
                 </div>
-              
-              <div class="feature-link"><a href="{{feature.link}}" target="_blank"><i class="fas fa-external-link-square-alt"></i></a></div>
+                
             </div>
             
           </div>
+        {% else %}
+            <div class="feature-card" data-aos="fade-up" data-aos-duration="1000">
+              {{feature.vid}}
+              <div class="feature-desc-left">
+                <div class="feature-wrapper">
+                  <div class="feature-background-left"></div>
+                  <div class="feature-main-left">
+                    <div class="small-feature"><h6>Featured Project</h6></div>
+                    <div class="feature-title"><h3 >{{feature.title}}</h3></div>
+                    <div class="feature-content"><p>{{feature.content}}</p></div>
+                    <div class="feature-skills">
+                      <table class="featured-table-left">
+                        <tr>
+                          {% for skill in feature.skills%}
+                          <td class="red">{{skill}}</td>
+                          {%endfor%}
+                          
+                        </tr>
+                      </table>
+                        
+                      </div>
+                    
+                    <div class="feature-link"><a href="{{feature.link}}" target="_blank"><i class="fas fa-external-link-square-alt"></i></a></div>
+                </div>
+              </div>
+                
+            </div>
 
-          <div class="video-wrapper-left my-auto">{{feature.vid}}</div>
+          
 
      
           

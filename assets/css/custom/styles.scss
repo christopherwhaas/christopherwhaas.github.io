@@ -214,7 +214,7 @@ a:active{
 //###################### INDEX ################################
 
 
-#home, #bio, #experience, #projects, #contact {
+#home, #bio, #background, #projects, #contact {
   min-height: 100vh;
   width: 100% !important;
   display: flex;
@@ -269,19 +269,19 @@ a:active{
    font-size: 90%;
  }
 
- // Experience
+ // Background
 
  .exp-desc{
    text-align: left;
    padding: 0;
-   font-size: 110%;
+   font-size: 100%;
 
    
  }
 
  @media only screen and (min-width: 1200px){
   .exp-desc{
-    padding: 0 10%;
+    padding: 0 30px;
     
   }
  }
@@ -692,13 +692,14 @@ a:active{
 		}
 		
 		&.active{
-			color: #D8D8D8;
+      color: #00AF00;
+      
 			
 			&:before{
 				transition-duration: .5s;
 				background-color: #04070970;
 				-webkit-transform: translateY(0);
-				transform: translateY(0);
+        transform: translateY(0);
 			}
 		}
 	}
@@ -723,7 +724,7 @@ a:active{
   background-color: #04070970;
 	position: relative;
 	width: 80%;
-	border-radius: 5px;
+	border-radius: 0 0 5px 5px;
 	
 	>li{
 		width: 100%;
@@ -736,20 +737,21 @@ a:active{
 		
 		.content__wrapper{
 			text-align: center;
-			border-radius: 5px;
+			border-radius: 0 0 5px 5px;
 			width: 100%;
-			padding: 45px 40px 40px 40px;
+			padding: 45px 25px 40px 25px;
 			
 		}
 	}
 }
 
 .content__wrapper{
-	h2{
+	h3{
 		width: 100%;
 		text-align: center;
 		padding-bottom: 20px;
-		font-weight: 300;
+    font-weight: 300;
+    font-size: 130%;
 	}
 	
 	img{

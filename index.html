@@ -6,13 +6,13 @@ title: Chris' Portfolio
 
   <div id="home">
     <div class="content my-auto" >
-      <h5 class="green" data-aos="fade-down" data-aos-duration="1500">Hello world, my name is </h5>
+    <h5 class="green" data-aos="fade-down" data-aos-duration="1500">Hello, world! My name is </h5>
       <div data-aos="fade-up" data-aos-duration="2000">
         <h1 class="px-sm-5 pt-3" >Christopher Haas.</h1>
       <h1 class="">I like to <span class="red">build</span> things.</h1>
       <p class="about">I am a Full-Stack Software Engineer and Web Developer studying Information Systems and Civil &amp; Environmental Engineering at Carnegie Mellon University.</p>
       <br><br>
-      <a href="mailto:chaas@andrew.cmu.edu" class="btn btn-outline-success" ><h5>SAY HELLO</h5></a>
+      <a href="mailto:chaas@andrew.cmu.edu" class="btn btn-outline-success" ><h5>REACH OUT</h5></a>
       </div>
       
     </div>
@@ -21,17 +21,17 @@ title: Chris' Portfolio
   <div id="bio" >
     <div class="content">
       <div data-aos="fade-up" data-aos-duration="800">
-        <h5 class="section-title" ><span class="green ">01.</span> BIO </h5>
+        <h5 class="section-title" ><span class="green ">0</span> BIO </h5>
         <hr>
       </div>
       
       <div class="row">
-        <div class="col-12 col-lg-5 order-lg-1 text-center mb-4" data-aos="fade-up" data-aos-duration="1000">
+        <div class="col-12 col-lg-5 order-lg-0 text-center mb-4" data-aos="fade-up" data-aos-duration="1000">
           
           <img src="assets/images/aboutChris.jpg" width="100%" class="aboutImg img-responsive rounded mx-auto my-auto">
 
         </div>
-        <div class="col-12 col-lg-7 order-lg-0" data-aos="fade-up" data-aos-duration="1000">
+        <div class="col-12 col-lg-7 order-lg-1" data-aos="fade-up" data-aos-duration="1000">
           <p>Hello! My name is Chris, and I am a student-athlete at <a href="https://cmu.edu"  target="_blank">Carnegie Mellon University</a>. I am
             currently pursuing a dual degree in Information Systems and Civil &amp; Environmental
             Engineering with a minor in Business Administration graduating in May of 2021. I was elected as one of four  
@@ -42,7 +42,7 @@ title: Chris' Portfolio
             local coffee shop working on various projects. I love the outdoors and try to get out as
             much as possible. That involves anything from snowboarding to scuba diving, and anywhere in 
             between.</p>
-            <p>Here is what I've been working with lately:</p>
+            <p>These are my go-to tools:</p>
             <div class="row mx-2">
               <ul class="col-6">
                 <li>Ruby on Rails</li>
@@ -62,9 +62,9 @@ title: Chris' Portfolio
     </div>
   </div>
   
-  <div id="experience">
+  <div id="background">
     <div class="content" data-aos="fade-up" data-aos-duration="1000">
-      <h5  class="section-title"><span class="green">02.</span> EXPERIENCE</h5>
+      <h5  class="section-title"><span class="green">1</span> BACKGROUND</h5>
       <hr>
      <div class="my-4" >
 
@@ -80,7 +80,7 @@ title: Chris' Portfolio
             {% for exp in site.work%}
             <li {%if forloop.first %} class="active" {%endif%}>
               <div class="content__wrapper">
-                <h3>{{exp.name}} <a href="{{exp.link}}">@{{exp.company}}</a></h3>
+                <h3>{{exp.name}} <a href="{{exp.link}}" target="_blank">@{{exp.company}}</a></h3>
                 <h6>{{exp.start}} - {{exp.end}} </h6>
                 <div class="exp-desc">
                   <p> {{ exp.content | markdownify }}</p>
@@ -100,7 +100,7 @@ title: Chris' Portfolio
   <div id="projects">
     <div class="content">
       <div data-aos="fade-up" data-aos-duration="1000">
-        <h5  class="section-title"><span class="green">03.</span> PROJECTS</h5>
+        <h5  class="section-title"><span class="green">2</span> PROJECTS</h5>
         <hr>
       </div>
       
@@ -231,11 +231,11 @@ title: Chris' Portfolio
   
   <div id="contact">
     <div class="content about  mx-auto" data-aos="fade-up" data-aos-duration="1000">
-      <h5  class="section-title"><span class="green">04.</span> CONTACT</h5>
+      <h5  class="section-title"><span class="green">3</span> CONTACT</h5>
       <hr>
       <p class="text-center contactDesc">I am currently on the hunt for Software Engineering roles. Whether you have a question about a project, are actively hiring, or just want to say hi, please feel free to reach out! </p>
       <br>
-      <div class="text-center"> <a href="mailto:chaas@andrew.cmu.edu" class="btn btn-outline-success" ><h5>SAY HELLO</h5></a></div>
+      <div class="text-center"> <a href="mailto:chaas@andrew.cmu.edu" class="btn btn-outline-success" ><h5>SEND A MESSAGE</h5></a></div>
      
      </div>
   

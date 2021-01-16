@@ -40,13 +40,14 @@
 }
 
 html{
-  background-color: #282C34;
+  
 }
 
 body{
   font-family: "Raleway", sans-serif;
   color: #D8D8D8;
   background-color: #282C34;
+  
 }
 
 h1, h2, h3 {
@@ -515,7 +516,7 @@ a:active{
    position: relative;
    padding: 10px 20px;
    border-radius: 5px;
-   background-color: #04070950;
+   background-color: #040709c5;
    
 
    h3{
@@ -553,7 +554,7 @@ a:active{
     padding-bottom: 9px;
 
     .project{
-      background-color: #04070960;
+      background-color: #040709de;
       
     }
      
@@ -696,7 +697,7 @@ a:active{
 			
 			&:before{
 				transition-duration: .5s;
-				background-color: #04070970;
+				background-color: #040709c5;
 				-webkit-transform: translateY(0);
         transform: translateY(0);
 			}
@@ -720,7 +721,7 @@ a:active{
 
 .tab__content{
   margin: 10px auto;
-  background-color: #04070970;
+  background-color: #040709c5;
 	position: relative;
 	width: 80%;
 	border-radius: 0 0 5px 5px;
@@ -803,4 +804,17 @@ small{
   .footer-table {
     display: none;
   }
+}
+
+// ############### BACKGROUND
+
+#animation{
+  position: fixed;
+  background-color: #282C34;
+  z-index: -999;
+  height: 100vh;
+  width: 100vw;
+  top: 0;
+  left: 0;
+
 }

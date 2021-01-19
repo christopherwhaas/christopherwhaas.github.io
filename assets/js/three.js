@@ -807,7 +807,7 @@ var SEPARATION = 120,
  
         if (event.touches.length === 1) {
  
-            event.preventDefault();
+         
  
             mouseX = event.touches[0].pageX - windowHalfX;
             
@@ -821,8 +821,7 @@ var SEPARATION = 120,
  
         if (event.touches.length === 1) {
  
-            event.preventDefault();
- 
+        
             mouseX = event.touches[0].pageX - windowHalfX;
             mouseY = event.touches[0].pageY/20- windowHalfY;
             

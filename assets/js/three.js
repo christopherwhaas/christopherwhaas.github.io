@@ -798,6 +798,7 @@ var SEPARATION = 120,
     function onDocumentMouseMove(event) {
  
         mouseX = event.clientX - windowHalfX;
+        mouseY = event.clientY/4 - windowHalfY;
        
  
     }
@@ -809,7 +810,8 @@ var SEPARATION = 120,
             event.preventDefault();
  
             mouseX = event.touches[0].pageX - windowHalfX;
-            mouseY = event.touches[0].pageY - windowHalfY;
+            
+           
  
         }
  
@@ -822,8 +824,9 @@ var SEPARATION = 120,
             event.preventDefault();
  
             mouseX = event.touches[0].pageX - windowHalfX;
-            mouseY = event.touches[0].pageY - windowHalfY;
- 
+            mouseY = event.touches[0].pageY/20- windowHalfY;
+            
+           
         }
  
     }

@@ -774,6 +774,7 @@ var SEPARATION = 120,
         document.addEventListener('mousemove', onDocumentMouseMove, false);
         document.addEventListener('touchstart', onDocumentTouchStart, false);
         document.addEventListener('touchmove', onDocumentTouchMove, false);
+        document.addEventListener('scroll', onScroll, false);
  
         //
  
@@ -798,7 +799,7 @@ var SEPARATION = 120,
     function onDocumentMouseMove(event) {
  
         mouseX = event.clientX - windowHalfX;
-        mouseY = event.clientY/4 - windowHalfY;
+        
        
  
     }
@@ -823,11 +824,19 @@ var SEPARATION = 120,
  
         
             mouseX = event.touches[0].pageX - windowHalfX;
-            mouseY = event.touches[0].pageY/20- windowHalfY;
             
            
         }
  
+    }
+
+    function onScroll() {
+        var element = $(this);
+        var pos = element.scrollTop();
+        var total = $(document).height() - $(window).height();
+        mouseY =  -600 * (1 - (pos / total)) - 100;
+        console.log(mouseY);
+        
     }
  
     //

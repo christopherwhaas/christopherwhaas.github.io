@@ -1,0 +1,186 @@
+---
+---
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@100&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,900;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap');
+
+
+// ############ Genral Page Setup
+
+
+
+
+
+.wrapper{
+    margin: 0;
+    width: 100%;
+    padding-top: 5px;
+}
+
+
+#sorter{
+    height: calc(100vh - 65px);
+    padding: 0;
+}
+
+
+#filter{
+    border-right: #00AF00 solid 1px;
+    padding: 0;
+    
+}
+
+.footer-table {
+    display: flex;
+    max-width: 820px;
+    margin: 0 auto;
+    border-top: #04070920 1px solid;
+    padding-top: 50px;
+    margin-top: 50px;
+  }
+
+
+@media only screen and (max-width: 767px){
+    
+    #filter{
+        border-bottom:  #00AF00 solid 1px;
+        border-right: none;
+    }
+
+    #sorter{
+        height: auto;
+        padding: 100px 0;
+    }
+
+   
+  }
+
+
+//###################### Filter
+
+#filter-content{
+    text-align: center;
+    margin: auto 0;
+    
+}  
+
+.filter-form h4{
+    color: #00AF00;
+    font-size: 1.5rem;
+    margin: 4% 0;
+
+}
+
+
+    // ########## New Array
+    #new-array{
+        margin: 5% 0;
+        font-size: 1.5rem;
+    }
+
+    // ########## Algo Selector
+    .algorithm-select{
+        margin: 8% 0;
+    }
+
+    .algorithm-select input[type="radio"] {
+        display: none;
+    }      
+
+    .algorithm-select label {
+        color: #00ABE4;
+        display: block;
+        padding: 5px 0;
+        margin: 2px 0;
+        cursor: pointer;
+        font-family: 'Roboto Mono', sans-serif;
+    } 
+    
+    .algorithm-select label:hover {
+        color: #FF2164;
+        
+    } 
+
+    .algorithm-select input[type="radio"]:checked+label {
+        color: #FF2164;
+        font-weight: bold;
+    }
+
+
+    //###### SLIDER
+    // Modified from https://www.w3schools.com/howto/howto_js_rangeslider.asp
+    .slider-container{
+        margin: 8% 0;
+    }
+
+    .slider {
+        -webkit-appearance: none;
+        width: 70%;
+        height: 6px;
+        border-radius: 2px;  
+        background: #00ABE4;
+        outline: none;
+        opacity: 0.5;
+        -webkit-transition: .2s;
+        transition: opacity .2s;
+      }
+
+      .slider:hover {
+        opacity: 1; /* Fully shown on mouse-over */
+      }
+      
+      
+      .slider::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%; 
+        background: #FF2164;
+        border-color: #FF2164;
+        cursor: pointer;
+      }
+      
+      .slider::-moz-range-thumb {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: #FF2164;
+        border-color: #FF2164;
+        cursor: pointer;
+      }
+
+      // ########## Submit Sort
+    #sort-submit{
+        margin: 5% 0;
+        font-size: 1.5rem;
+        padding-right: 20px;
+        padding-left: 20px;
+    }
+
+
+
+// ########## SORTER
+
+#array{
+    margin: 0 5px;
+}
+
+.array-square{
+    transition: transform ease-in 0.3s; 
+    transition-delay: 750ms;
+    transition-timing-function: ease;
+    display: inline-block;
+    margin: 0 5px;
+    background-color: #00AF00;
+    border: #040709 solid 1px;
+}
+
+.final{
+    box-shadow: 0px 0px 12px #00AF00;
+}
+
+.highlighted{
+    box-shadow: 0px 0px 12px #00ABE4;
+}

@@ -5,3 +5,5 @@ _site
 .jekyll-metadata
 vendor/bundle
 CNAME
+assets/.DS_Store
+assets/css/.DS_Store

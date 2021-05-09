@@ -1,0 +1,57 @@
+---
+layout: sorting
+title: Sorting Visualizer
+---
+
+<div class="container-fluid">
+    <div class="row justify-content-around">
+        <!-- Container for the Filters -->
+        <div class="col-11 col-md-3 d-flex align-items-center justify-content-around" id="filter">
+            <div id="filter-content">
+                <button class="btn btn-outline-success" id="new-array" >NEW ARRAY</button>
+                <div class="filter-form">
+                    <div class="algorithm-select">
+
+                        <h4>Sorting Algos</h4>
+                        <input type="radio" name="algo" value="bubble" id="bubble" checked>
+                        <label for="bubble">  Bubble Sort </label>
+
+                        <input type="radio" name="algo" value="selection" id="selection"> 
+                        <label for="selection"> Selection Sort </label>
+
+
+                        <!-- Todo in the future: Implement the other Sorting Algos -->
+<!--                         
+                        <input type="radio" name="algo" value="insertion" id="insertion">
+                        <label for="insertion">  Insertion Sort </label>
+
+                        <input type="radio" name="algo" value="merge" id="merge">
+                        <label for="merge">  Merge Sort </label>
+
+                        <input type="radio" name="algo" value="quick" id="quick">
+                        <label for="quick">  Quick Sort </label> -->
+    
+                    </div>
+                  
+                    <div class="slider-container">
+                        <label for="size"><h4>Data Size</h4></label>
+                        <input type="range" min="2" max="16" value="9" class="slider" id="size">
+                        <h5 id="size-output"></h5>
+                    </div>
+
+                </div>
+
+                <button class="btn btn-outline-danger" id="sort-submit" >SORT</button>
+            </div>
+           
+            
+        </div>
+
+        <div class="col-12 col-md-9 d-flex align-items-center justify-content-center" id="sorter">
+            <div id="array">
+                <!-- Array holder where the squares will go -->
+            </div>
+        </div>
+    </div>
+</div>
+

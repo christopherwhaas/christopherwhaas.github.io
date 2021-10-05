@@ -835,7 +835,7 @@ var SEPARATION = 120,
         var pos = element.scrollTop();
         var total = $(document).height() - $(window).height();
         mouseY =  -600 * (1 - (pos / total)) - 100;
-        console.log(mouseY);
+        
         
     }
  

@@ -1,7 +1,6 @@
 ---
 ---
 
-@import 'bootstrap/bootstrap';
 
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@100&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,900;1,900&display=swap');
@@ -42,6 +41,8 @@
 html{
   
 }
+
+
 
 body{
   font-family: "Raleway", sans-serif;
@@ -189,9 +190,21 @@ a:active{
   top: -50px; // same as header height. use variables in LESS/SASS
 }
 
+
+.btn-outline-success {
+  border-color: #00AF00;
+  color: #00AF00;
+}
+
+.btn-outline-success:hover {
+  background-color: #00AF00;
+  color: #282C34;
+  font-weight: bolder;
+}
+
 .nav-item .btn-outline-success:hover {
-  border-color: #00ABE4;
-  background-color: #00AF0000;
+  border-color: #00ABE4 !important;
+  background-color: #00AF0000 ;
   color: #00ABE4;
 }
 
@@ -305,3 +318,13 @@ a:active{
     }
   }
   
+
+  //######################### MODAL
+
+  .modal-content{
+    background-color: #f7f7f7;
+  }
+
+  .modal-footer .btn-outline-success:hover{
+    color: #f7f7f7;
+  }

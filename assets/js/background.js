@@ -1,80 +1,170 @@
-$(document).ready(function(){
-	
-	// Variables
-	var clickedTab = $(".tabs > .active");
-	var tabWrapper = $(".tab__content");
-	var activeTab = tabWrapper.find(".active");
-	var activeTabHeight = activeTab.outerHeight();
 
-	$(window).resize(function() {
-		$(".tab__content").height($(".tab__content > .active").outerHeight() + "px");
-	});
 	
-	// Show tab on page load
-	activeTab.show();
-	
-	// Set height of wrapper on page load
-	tabWrapper.height(activeTabHeight);
-	
-	$(".tabs > li").on("click", function() {
-		
-		// Remove class from active tab
-		$(".tabs > li").removeClass("active");
-		
-		// Add class active to clicked tab
-		$(this).addClass("active");
-		
-		// Update clickedTab variable
-		clickedTab = $(".tabs .active");
-		
-		// fade out active tab
-		activeTab.fadeOut(250, function() {
-			
-			// Remove active class all tabs
-			$(".tab__content > li").removeClass("active");
-			
-			// Get index of clicked tab
-			var clickedTabIndex = clickedTab.index();
+	var SEPARATION = 120,
+    AMOUNTX = 70,
+    AMOUNTY = 70;
 
-			// Add class active to corresponding tab
-			$(".tab__content > li").eq(clickedTabIndex).addClass("active");
-			
-			// update new active tab
-			activeTab = $(".tab__content > .active");
-			
-			// Update variable
-			activeTabHeight = activeTab.outerHeight();
-			
-			// Animate height of wrapper to new tab height
-			tabWrapper.stop().delay(50).animate({
-				height: activeTabHeight
-			}, 500, function() {
-				
-				// Fade in active tab
-				activeTab.delay(50).fadeIn(250);
-				
-			});
-		});
-	});
-	
-	// Variables
-	var colorButton = $(".colors li");
-	
-	colorButton.on("click", function(){
-		
-		// Remove class from currently active button
-		$(".colors > li").removeClass("active-color");
-		
-		// Add class active to clicked button
-		$(this).addClass("active-color");
-		
-		// Get background color of clicked
-		var newColor = $(this).attr("data-color");
-		
-		// Change background of everything with class .bg-color
-		$(".bg-color").css("background-color", newColor);
-		
-		// Change color of everything with class .text-color
-		$(".text-color").css("color", newColor);
-	});
-});
+var container;
+var camera, scene, renderer;
+
+var particles, particle, count = 0;
+
+var mouseX = 85,
+    mouseY = -700;
+
+var windowHalfX = window.innerWidth / 2;
+var windowHalfY = window.innerHeight / 2;
+
+init();
+animate();
+
+function init() {
+
+    container = document.querySelector('#animation');
+    
+
+    camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 10000);
+    camera.position.z = 1200;
+
+    scene = new THREE.Scene();
+
+    particles = new Array();
+
+    var PI2 = Math.PI * 2;
+    var material = new THREE.ParticleCanvasMaterial({
+
+        color: 0x505255,
+        program: function(context) {
+
+            context.beginPath();
+            context.arc(0, 0, .6, 0, PI2, true);
+            context.fill();
+
+        }
+
+    });
+
+    var i = 0;
+
+    for (var ix = 0; ix < AMOUNTX; ix++) {
+
+        for (var iy = 0; iy < AMOUNTY; iy++) {
+
+            particle = particles[i++] = new THREE.Particle(material);
+            particle.position.x = ix * SEPARATION - ((AMOUNTX * SEPARATION) / 2);
+            particle.position.z = iy * SEPARATION - ((AMOUNTY * SEPARATION) / 2);
+            scene.add(particle);
+
+        }
+
+    }
+
+    renderer = new THREE.CanvasRenderer();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    container.appendChild(renderer.domElement);
+
+    document.addEventListener('mousemove', onDocumentMouseMove, false);
+    document.addEventListener('touchstart', onDocumentTouchStart, false);
+    document.addEventListener('touchmove', onDocumentTouchMove, false);
+    document.addEventListener('scroll', onScroll, false);
+
+    //
+
+    window.addEventListener('resize', onWindowResize, false);
+
+}
+
+function onWindowResize() {
+
+    windowHalfX = window.innerWidth / 2;
+    windowHalfY = window.innerHeight / 2;
+
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+
+    renderer.setSize(window.innerWidth, window.innerHeight);
+
+}
+
+//
+
+function onDocumentMouseMove(event) {
+
+    mouseX = event.clientX - windowHalfX;
+    
+   
+
+}
+
+function onDocumentTouchStart(event) {
+
+    if (event.touches.length === 1) {
+
+     
+
+        mouseX = event.touches[0].pageX - windowHalfX;
+        
+       
+
+    }
+
+}
+
+function onDocumentTouchMove(event) {
+
+    if (event.touches.length === 1) {
+
+    
+        mouseX = event.touches[0].pageX - windowHalfX;
+        
+       
+    }
+
+}
+
+function onScroll() {
+    var element = $(this);
+    var pos = element.scrollTop();
+    var total = $(document).height() - $(window).height();
+    mouseY =  -600 * (1 - (pos / total)) - 100;
+    
+    
+}
+
+//
+
+function animate() {
+
+    requestAnimationFrame(animate);
+
+    render();
+
+
+}
+
+function render() {
+
+    camera.position.x += (mouseX - camera.position.x) * .05;
+    camera.position.y += (-mouseY - camera.position.y) * .05;
+    camera.lookAt(scene.position);
+
+    var i = 0;
+
+    for (var ix = 0; ix < AMOUNTX; ix++) {
+
+        for (var iy = 0; iy < AMOUNTY; iy++) {
+
+            particle = particles[i++];
+            particle.position.y = (Math.sin((ix + count) * 0.3) * 50)/1.3 + (Math.sin((iy + count) * 0.5) * 50)/1.3;
+            particle.scale.x = particle.scale.y = (Math.sin((ix + count) * 0.3) + 1) * 1.7 + (Math.sin((iy + count) * 0.5) + 1) * 1.7;
+
+        }
+
+    }
+
+    renderer.render(scene, camera);
+
+    count += 0.04;
+
+}
+

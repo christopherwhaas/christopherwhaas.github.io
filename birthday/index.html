@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sniglet&display=swap" rel="stylesheet"> 
+
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap" rel="stylesheet"> 
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@500&display=swap" rel="stylesheet"> 
+<style>
+
+h1, h2, h3 {
+    font-family: "Sniglet"
+}
+
+h1{
+    text-align: center;
+    font-size: 4vw;
+    text-shadow: rgba(0, 0, 0, 0.201) 2px 2px 2px;
+}
+
+html{
+    background-color: #333;
+}
+
+
+.container
+{
+  max-width: 1000px;
+  margin: 50px auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+.card
+{
+    
+  position: relative;
+  margin: 20px;
+  width: 45vw;
+  height: 60vw;
+  max-width:450px;
+  max-height:600px;
+  min-width: 300px;
+  min-height: 400px;
+  background: #fff;
+  transform-style: preserve-3d;
+  transform: perspective(2000px);
+  box-shadow: inset 300px 0 50px rgba(0,0,0,.5), 0 20px 20px rgba(0,0,0,.5);
+  transition: 1s;
+}
+.card:hover
+{
+  z-index: 10000;
+  transform: perspective(2000px) rotate(-10deg);
+  box-shadow: inset 20px 0 50px rgba(0,0,0,.5), 0 10px 100px rgba(0,0,0,.5);
+}
+
+.card .Box
+{
+  background-image: url("textured-paper.png");
+  position: relative;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  position: relative;
+  transform-origin: left;
+  z-index: 2;
+  transition: 1s cubic-bezier(.15,1.7,.84,.58);
+  background-color: #ffffff;
+}
+.card .Box img
+{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: fit;
+  background-repeat: no-repeat;
+}
+.card:hover .Box
+{
+  transform: rotateY(-135deg);
+}
+.card .details
+{
+  font-size: 3.5vw;
+  position: absolute;
+  top: 0;
+  left: 0;
+  box-sizing: border-box;
+  padding: 10px;
+  z-index: 1;
+  height: 100%;
+  align-content: center;
+  display: flex;
+ 
+  font-family: "Indie Flower";
+
+}
+
+.card .details:before{
+    content: ' ';
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.6;
+  background-image: url("textured-paper.png");
+  background-color: #fff;
+  background-position: 50% 0;
+  background-size: cover;
+  z-index: -1;
+
+}
+
+.card .centered::-webkit-scrollbar {
+  display: none;
+  
+  
+}
+
+.card .centered{
+    width: 80%;
+    margin: auto;
+    display: flexbox;
+    text-align: center;
+    overflow-y: auto;
+    max-height:100%;
+
+}
+.hidden {
+  opacity:0;
+}
+.console-container {
+ 
+  font-family:"Roboto Mono";
+  font-size:3em;
+  text-align:center;
+  margin: 20px auto;
+
+  width:100%;
+  display:block;
+  
+  color:white;
+
+
+}
+
+@media (max-width: 400px) {
+    .console-container {
+ 
+        height:30px;
+    }
+        
+
+}
+
+
+.console-underscore {
+   display:inline-block;
+  position:relative;
+  top:0;
+  left:0px;
+}
+
+#confetti-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+}
+
+.ps{
+
+    text-align: center;
+    font-family: "Montserrat";
+    color: #17cb1a;
+
+}
+
+
+.envelope {
+  position: relative;
+  cursor: pointer;
+}
+
+.back {
+  font-family: "Singlet";
+  position: relative;
+  width:250px;
+  height: 150px;
+  background-color: #c3a981;
+}
+
+
+.front {
+  position: absolute;
+  border-right: 130px solid #c8b599;
+  border-top: 75px solid transparent;
+  border-bottom: 75px solid transparent;
+  height:0;
+  width:0;
+  top:0;
+  left:120px;
+  z-index:3;
+}
+
+.front:before {
+  content:"";
+  position: absolute;
+  border-left: 130px solid #c8b599;
+  border-top: 75px solid transparent;
+  border-bottom: 75px solid transparent;
+  height:0;
+  width:0;
+  top:-75px;
+  left:-120px;
+}
+
+.front:after {
+  content:"";
+  position: absolute;
+  border-bottom: 80px solid #c5b297;
+  border-left: 125px solid transparent;
+  border-right:125px solid transparent;
+  height:0;
+  width:0;
+  top:-5px;
+  left:-120px;
+}
+
+.top {
+  position: absolute;
+  border-top: 105px solid #cab08a;
+  border-left: 125px solid transparent;
+  border-right:125px solid transparent;
+  height:0;
+  width:0;
+  top:0;
+  transform-origin: top;
+  transition: .4s;
+  z-index:4;
+}
+
+.shadow {
+  position: absolute;
+  background-color: rgba(0,0,0,0.1);
+  width:250px;
+  height:10px;
+  top:220px;
+  border-radius:50%;
+}
+
+.envelope:hover .top {
+    transform: rotateX(160deg);
+}
+
+
+.overlay{
+    background-color: #dbddf2;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 900;
+    display: flex; 
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    transform-origin: top;
+    transition: .4s;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+body {
+  background-color: #333;
+  margin: 0;
+}
+
+.cake {
+  position: absolute;
+  width: 250px;
+  height: 200px;
+  top: 50%;
+  left: 50%;
+  margin-top: -70px;
+  margin-left: -125px;
+}
+
+.plate {
+  width: 270px;
+  height: 110px;
+  position: absolute;
+  bottom: -10px;
+  left: -10px;
+  background-color: #ccc;
+  border-radius: 50%;
+  box-shadow: 0 2px 0 #b3b3b3, 0 4px 0 #b3b3b3, 0 5px 40px rgba(0, 0, 0, 0.5);
+}
+
+.cake > * {
+  position: absolute;
+}
+
+.layer {
+  position: absolute;
+  display: block;
+  width: 250px;
+  height: 100px;
+  border-radius: 50%;
+  background-color: #553c13;
+  box-shadow: 0 2px 0px #6a4b18, 0 4px 0px #33240b, 0 6px 0px #32230b, 0 8px 0px #31230b, 0 10px 0px #30220b, 0 12px 0px #2f220b, 0 14px 0px #2f210a, 0 16px 0px #2e200a, 0 18px 0px #2d200a, 0 20px 0px #2c1f0a, 0 22px 0px #2b1f0a, 0 24px 0px #2a1e09, 0 26px 0px #2a1d09, 0 28px 0px #291d09, 0 30px 0px #281c09;
+}
+
+.layer-top {
+  top: 0px;
+}
+
+.layer-middle {
+  top: 33px;
+}
+
+.layer-bottom {
+  top: 66px;
+}
+
+.icing {
+  top: 2px;
+  left: 5px;
+  background-color: #f0e4d0;
+  width: 240px;
+  height: 90px;
+  border-radius: 50%;
+}
+.icing:before {
+  content: "";
+  position: absolute;
+  top: 4px;
+  right: 5px;
+  bottom: 6px;
+  left: 5px;
+  background-color: #f4ebdc;
+  box-shadow: 0 0 4px #f6efe3, 0 0 4px #f6efe3, 0 0 4px #f6efe3;
+  border-radius: 50%;
+  z-index: 1;
+}
+
+.drip {
+  display: block;
+  width: 50px;
+  height: 60px;
+  border-bottom-left-radius: 25px;
+  border-bottom-right-radius: 25px;
+  background-color: #f0e4d0;
+}
+
+.drip1 {
+  top: 53px;
+  left: 5px;
+  transform: skewY(15deg);
+  height: 48px;
+  width: 40px;
+}
+
+.drip2 {
+  top: 69px;
+  left: 181px;
+  transform: skewY(-15deg);
+}
+
+.drip3 {
+  top: 54px;
+  left: 90px;
+  width: 80px;
+  border-bottom-left-radius: 40px;
+  border-bottom-right-radius: 40px;
+}
+
+.candle {
+  background-color: #7b020b;
+  width: 16px;
+  height: 50px;
+  border-radius: 8px/4px;
+  top: -20px;
+  left: 50%;
+  margin-left: -8px;
+  z-index: 10;
+}
+.candle:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 16px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #ad030f;
+}
+
+.flame {
+  position: absolute;
+  background-color: orange;
+  width: 15px;
+  height: 35px;
+  border-radius: 10px 10px 10px 10px/25px 25px 10px 10px;
+  top: -34px;
+  left: 50%;
+  margin-left: -7.5px;
+  z-index: 10;
+  box-shadow: 0 0 10px rgba(255, 165, 0, 0.5), 0 0 20px rgba(255, 165, 0, 0.5), 0 0 60px rgba(255, 165, 0, 0.5), 0 0 80px rgba(255, 165, 0, 0.5);
+  transform-origin: 50% 90%;
+  animation: flicker 1s ease-in-out alternate infinite;
+}
+
+@keyframes flicker {
+  0% {
+    transform: skewX(5deg);
+    box-shadow: 0 0 10px rgba(255, 165, 0, 0.2), 0 0 20px rgba(255, 165, 0, 0.2), 0 0 60px rgba(255, 165, 0, 0.2), 0 0 80px rgba(255, 165, 0, 0.2);
+  }
+  25% {
+    transform: skewX(-5deg);
+    box-shadow: 0 0 10px rgba(255, 165, 0, 0.5), 0 0 20px rgba(255, 165, 0, 0.5), 0 0 60px rgba(255, 165, 0, 0.5), 0 0 80px rgba(255, 165, 0, 0.5);
+  }
+  50% {
+    transform: skewX(10deg);
+    box-shadow: 0 0 10px rgba(255, 165, 0, 0.3), 0 0 20px rgba(255, 165, 0, 0.3), 0 0 60px rgba(255, 165, 0, 0.3), 0 0 80px rgba(255, 165, 0, 0.3);
+  }
+  75% {
+    transform: skewX(-10deg);
+    box-shadow: 0 0 10px rgba(255, 165, 0, 0.4), 0 0 20px rgba(255, 165, 0, 0.4), 0 0 60px rgba(255, 165, 0, 0.4), 0 0 80px rgba(255, 165, 0, 0.4);
+  }
+  100% {
+    transform: skewX(5deg);
+    box-shadow: 0 0 10px rgba(255, 165, 0, 0.5), 0 0 20px rgba(255, 165, 0, 0.5), 0 0 60px rgba(255, 165, 0, 0.5), 0 0 80px rgba(255, 165, 0, 0.5);
+  }
+
+}
+
+#cake-overlay{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  visibility: visible;
+}
+
+#base-overlay {
+  visibility: hidden;
+  width: 100%;
+  height: 100%;
+}
+
+.smoke {
+  position: relative;
+  z-index: 40;
+  width: 2px;
+  margin-left: -1px;
+  left: 50%;
+  bottom: 10px;
+  opacity: 0;
+  transition: all 800ms linear;
+}
+
+.fade-in{
+  animation: fadeIn 5s;
+}
+
+.fade-out{
+  animation: fadeOut 3s;
+}
+
+.smoke span {
+  display: block;
+  position: absolute;
+  bottom: -35px;
+  left: 50%;
+  margin-left: -20px;
+  height: 0px;
+  width: 0px;
+  border: 30px solid rgba(0, 0, 0, 0.6);
+  border-radius: 22px;
+  border-bottom-left-radius: 0;
+  border-top-right-radius: 0;
+  left: -9px;
+  opacity: 0;
+  transform: scale(0.2, 0.2) rotate(-45deg);
+}
+
+@keyframes fadeIn {
+  0% { opacity: 0.1; }
+  100% { opacity: 0.6; }
+}
+
+@keyframes fadeOut {
+  0% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+@-webkit-keyframes smokeLeft {
+  0% {
+    transform: scale(0.2, 0.2) translate(0, 0) rotate(-45deg);
+  }
+  10% {
+    opacity: 1;
+    transform: scale(0.2, 0.3) translate(0, -5px) rotate(-45deg);
+  }
+  60% {
+    opacity: 0.6;
+    transform: scale(0.3, 0.5) translate(-10px, -80px) rotate(-45deg);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.4, 0.8) translate(-20px, -120px) rotate(-45deg);
+  }
+}
+
+@keyframes smokeLeft {
+  0% {
+    transform: scale(0.2, 0.2) translate(0, 0) rotate(-45deg);
+  }
+  10% {
+    opacity: 1;
+    transform: scale(0.2, 0.3) translate(0, -5px) rotate(-45deg);
+  }
+  60% {
+    opacity: 0.6;
+    transform: scale(0.3, 0.5) translate(-10px, -80px) rotate(-45deg);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.4, 0.8) translate(-20px, -120px) rotate(-45deg);
+  }
+}
+@-webkit-keyframes smokeRight {
+  0% {
+    transform: scale(0.2, 0.2) translate(0, 0) rotate(-45deg);
+  }
+  10% {
+    opacity: 1;
+    transform: scale(0.2, 0.3) translate(0, -5px) rotate(-45deg);
+  }
+  60% {
+    opacity: 0.6;
+    transform: scale(0.3, 0.5) translate(10px, -80px) rotate(-45deg);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.4, 0.8) translate(20px, -120px) rotate(-45deg);
+  }
+}
+@keyframes smokeRight {
+  0% {
+    transform: scale(0.2, 0.2) translate(0, 0) rotate(-45deg);
+  }
+  10% {
+    opacity: 1;
+    transform: scale(0.2, 0.3) translate(0, -5px) rotate(-45deg);
+  }
+  60% {
+    opacity: 0.6;
+    transform: scale(0.3, 0.5) translate(10px, -80px) rotate(-45deg);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.4, 0.8) translate(20px, -120px) rotate(-45deg);
+  }
+}
+.smoke .s-0 {
+  -webkit-animation: smokeLeft 7s 0s infinite;
+          animation: smokeLeft 7s 0s infinite;
+}
+
+.smoke .s-1 {
+  -webkit-animation: smokeRight 7s 0.7s infinite;
+          animation: smokeRight 7s 0.7s infinite;
+}
+
+.smoke .s-2 {
+  -webkit-animation: smokeLeft 7s 1.4s infinite;
+          animation: smokeLeft 7s 1.4s infinite;
+}
+
+.smoke .s-3 {
+  -webkit-animation: smokeRight 7s 2.1s infinite;
+          animation: smokeRight 7s 2.1s infinite;
+}
+
+.smoke .s-4 {
+  -webkit-animation: smokeLeft 7s 2.8s infinite;
+          animation: smokeLeft 7s 2.8s infinite;
+}
+
+.smoke .s-5 {
+  -webkit-animation: smokeRight 7s 3.5s infinite;
+          animation: smokeRight 7s 3.5s infinite;
+}
+
+.smoke .s-6 {
+  -webkit-animation: smokeLeft 7s 4.2s infinite;
+          animation: smokeLeft 7s 4.2s infinite;
+}
+
+.smoke .s-7 {
+  -webkit-animation: smokeRight 7s 4.9s infinite;
+          animation: smokeRight 7s 4.9s infinite;
+}
+
+.smoke .s-8 {
+  -webkit-animation: smokeLeft 7s 5.6s infinite;
+          animation: smokeLeft 7s 5.6s infinite;
+}
+
+.smoke .s-9 {
+  -webkit-animation: smokeRight 7s 6.3s infinite;
+          animation: smokeRight 7s 6.3s infinite;
+}
+
+#button {
+  visibility: hidden;
+}
+
+
+button {
+  text-align: center;
+  position: absolute;
+  bottom: 30px;
+  left: 0;
+  right: 0;
+  width: 100%;
+  display: inline-block;
+  cursor: pointer;
+  outline: none;
+  border: 0;
+  vertical-align: middle;
+  text-decoration: none;
+  background: transparent;
+  padding: 0 10px;
+  font-size: inherit;
+}
+button.learn-more {
+  width: 100%;
+  height: auto;
+}
+button.learn-more .circle {
+  transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+  position: relative;
+  display: block;
+  margin: 0;
+  width: 3rem;
+  height: 3rem;
+  background: #c6c2ac;
+  border-radius: 1.625rem;
+}
+button.learn-more .circle .icon {
+  transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  background: #fff;
+}
+button.learn-more .circle .icon.arrow {
+  transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+  left: 0.625rem;
+  width: 1.125rem;
+  height: 0.125rem;
+  background: none;
+}
+button.learn-more .circle .icon.arrow::before {
+  position: absolute;
+  content: "";
+  top: -0.25rem;
+  right: 0.0625rem;
+  width: 0.625rem;
+  height: 0.625rem;
+  border-top: 0.125rem solid #fff;
+  border-right: 0.125rem solid #fff;
+  transform: rotate(45deg);
+}
+button.learn-more .button-text {
+  transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 0.75rem 0;
+  margin: 0 0 0 1.85rem;
+  color: #c6c2ac;
+  font-weight: 700;
+  line-height: 1.6;
+  text-align: center;
+  text-transform: uppercase;
+}
+button:hover .circle {
+  width: 100%;
+}
+button:hover .circle .icon.arrow {
+  background: #fff;
+  transform: translate(1rem, 0);
+}
+button:hover .button-text {
+  color: #201f1f;
+}
+
+.show {
+  display: block;
+  visibility: visible !important;
+}
+
+.hide {
+  display: none;
+  visibility: hidden;
+}
+
+
+    </style>
+</head>
+<body >
+  <div id="cake-overlay">
+    <div class="cake">
+      <div class="plate"></div>
+      <div class="layer layer-bottom"></div>
+      <div class="layer layer-middle"></div>
+      <div class="layer layer-top"></div>
+      <div class="icing"></div>
+      <div class="drip drip1"></div>
+      <div class="drip drip2"></div>
+      <div class="drip drip3"></div>
+      <div class="candle">
+        <div>
+          <div id="flame" onclick="blowOut()" style="height:100px;width:100px;">
+          <span class="flame" ></span>
+          </div>
+          <div class="smoke" id="smoke">
+            <span class="s-0"></span>
+            <span class="s-1"></span>
+            <span class="s-2"></span>
+            <span class="s-3"></span>
+            <span class="s-4"></span>
+            <span class="s-5"></span>
+            <span class="s-6"></span>
+            <span class="s-7"></span>
+            <span class="s-8"></span>
+            <span class="s-9"></span>
+        </div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <h2 style="color: #f0e4d0;text-align: center;">
+        Make a wish and blow out your candle! 
+      </h2>
+      <h3 style="color: #f0e4d0;text-align: center;">(Tap on it)</h3>
+    </div>
+
+    <div>
+      <button class="learn-more" onclick="dismiss()" id="button">
+        <span class="circle" aria-hidden="true">
+          <span class="icon arrow"></span>
+        </span>
+        <span class="button-text">Open your card!</span>
+      </button>
+    </div>
+  </div>
+  <div id="base-overlay">
+    <div class="overlay" id="overlay"> 
+        
+        <div class="envelope" onclick="openLetter();">
+            <div class="back">
+                
+            </div>
+            
+            <div class="front"></div>
+            <div class="top" id="letter-top"></div>
+            <h2 style="width: 100%;">To Mom &#10084;</h2>
+            <div class="shadow"></div>
+        </div>
+
+    </div>
+    <div class='console-container' onmousedown="startConfetti();" onmouseup="stopConfetti();"><span id='text'></span></div>    
+    
+    <div class="container">
+        <div class="card">
+            <div class="Box">
+                <img src="happyBirthday-1.png">
+            </div>
+            <div class="details">
+                <div class="centered">
+                  <h2>Happy Birthday!!</h2>
+                  <p>
+                  Wish I could be there to celebrate with you!
+                  <br>
+                  I love you and hope you have an non-eventful sequence of enjoyable activities, i.e. no more hospital visits!
+                  <br> 
+                  You are the best Mom anyone could have asked for and even though I just saw you like two days ago,
+                  I'm excited to come visit next month. 
+                  <br>
+                  Love you and happy birthday!
+                  <br>
+                  <br>
+                  p.s. I know its not quite handwritten but my hands did write the code :)
+                  </p>
+                </div>
+              
+            </div>
+          </div>
+          
+      </div>
+      <script src="confetti.js"></script>
+      <script>
+          
+          function blowOut(){
+            document.querySelector('#flame').remove();
+
+            document.querySelector('#smoke').classList.add('fade-in');
+            document.querySelector('#button').classList.add('show')
+
+            setTimeout(function() {
+              document.querySelector('#smoke').style.opacity=0.6;
+
+            }, 4000);
+          }
+         
+          function openLetter(){
+            var overlay = document.getElementById('overlay');
+
+            var top = document.getElementById('letter-top');
+
+            overlay.style.top = "120vh";
+            
+            startConfetti();
+            
+
+            window.setInterval(function() {
+            stopConfetti();
+            }, 2000)
+
+          }
+
+          function dismiss() {
+            document.querySelector('#cake-overlay').remove();
+            document.querySelector('#base-overlay').classList.add('show');
+          }
+          
+
+
+      </script>
+    </div>
+        
+</body>
+</html>

@@ -318,66 +318,140 @@
   
   
   // ####################### TABS 
-  
-  
-  .tabs{
-    margin: 0 auto;
-    padding-left: 0;
-      display: table;
-      table-layout: fixed;
-      width: 80%;
-      -webkit-transform: translateY(5px);
-      transform: translateY(5px);
-      
-      >li{
-          transition-duration: .25s;
-          display: table-cell;
-          list-style: none;
-          text-align: center;
-          padding: 20px 3px 25px 3px;
-          position: relative;
-          overflow: hidden;
-          cursor: pointer;
-          color: #D8D8D8;
-          
-          &:before{
-              z-index: -1;
-              position: absolute;
-              content: "";
-              width: 100%;
-              height: 120%;
-              top: 0;
-              left: 0;
-              background-color: rgba(255, 255, 255, .3);
-              -webkit-transform: translateY(100%);
-              transform: translateY(100%);
-              transition-duration: .25s;
-              border-radius: 5px 5px 0 0;
-          }
-          
-          &:hover{
-              &:before{
-                  -webkit-transform: translateY(70%);
-                  transform: translateY(70%);
-              }
-        color: #D8D8D870;
-          }
-          
-          &.active{
-        color: #00AF00;
-        
-              
-              &:before{
-                  transition-duration: .5s;
-                  background-color: #040709c5;
-                  -webkit-transform: translateY(0);
-          transform: translateY(0);
-              }
-          }
-      }
+
+
+  .wrapper {
+    display: flex;
   }
   
-  @media only screen and (max-width: 464px){
+  .tabs {
+    flex: 1;
+    max-width: 20%;
+    list-style: none;
+    padding: 0; 
+  }
+  
+  .tabs li {
+    padding: 15px 20px;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.3s ease;
+    border-left: 1px solid #D8D8D8;
+  }
+  
+  .tabs li.active {
+    border-left: 1px solid #00AF00; /* Active tab border color */
+    background: #00af0005;
+    color: #00AF00;
+  }
+
+  .tabs li:hover {
+    color: #00AF00;
+    transition: all 0.3s ease;
+    background: #00af0005;
+  }
+  
+  .tab__content {
+    flex: 2;
+    padding: 20px;
+    background-color: #04070977;
+    border-radius: 4px 4px;
+    position: relative;
+    max-width: 80%;
+
+    >li{
+      width: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      display: none;
+      list-style: none;
+      
+      .content__wrapper{
+          text-align: center;
+          width: 100%;
+          padding: 45px 25px 40px 25px;
+          
+      }
+    }
+
+    li.active {
+      display: block;
+    }
+  }
+
+  
+  
+  @media only screen and (max-width:770px){
+    .tabs, .tab__content{
+      width: 100%;
+    }
+
+    .wrapper {
+      display: block;
+    }
+
+    .tabs{
+      margin: 0 auto;
+      padding-left: 0;
+      display: table;
+      table-layout: fixed;
+      max-width: 100%;
+      -webkit-transform: translateY(5px);
+      transform: translateY(5px);
+        
+        >li{
+            transition-duration: .25s;
+            display: table-cell;
+            border: none;
+            list-style: none;
+            text-align: center;
+            padding: 20px 3px 25px 3px;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            color: #D8D8D8;
+            border-bottom: 1px solid #D8D8D8;
+            
+            &:before{
+                z-index: -1;
+                position: absolute;
+                content: "";
+                width: 100%;
+                height: 120%;
+                top: 0;
+                left: 0;
+                background-color: rgba(255, 255, 255, .3);
+                -webkit-transform: translateY(100%);
+                transform: translateY(100%);
+                transition-duration: .25s;
+                border-radius: 5px 5px 0 0;
+            }
+            
+            &:hover{
+                &:before{
+                    -webkit-transform: translateY(70%);
+                    transform: translateY(70%);
+                }
+              color: #D8D8D870;
+            }
+            
+            &.active{
+              color: #00AF00;
+              border-left: none;
+              border-bottom: 1px solid #00AF00;
+          
+                
+                &:before{
+                    transition-duration: .5s;
+                    background-color: #04070977;
+                    -webkit-transform: translateY(0);
+            transform: translateY(0);
+                }
+            }
+        }
+    }
+
     .tabs li{
       font-size: 75% !important;
     }
@@ -389,57 +463,30 @@
         font-size: 110%;
       }
     }
-  }
-  
-  .tab__content{
-    margin: 10px auto;
-    background-color: #040709c5;
-      position: relative;
-      width: 80%;
+
+    .tab__content{
       border-radius: 0 0 5px 5px;
-      
-      >li{
-          width: 100%;
-          position: absolute;
-          top: 0;
-          left: 0;
-          
-          display: none;
-          list-style: none;
-          
-          .content__wrapper{
-              text-align: center;
-              border-radius: 0 0 5px 5px;
-              width: 100%;
-              padding: 45px 25px 40px 25px;
-              
-          }
-      }
+      margin: 10px auto;
+      max-width: 100%;
+    }
   }
   
   .content__wrapper{
       h3{
-          width: 100%;
-          text-align: center;
-          padding-bottom: 20px;
-      font-weight: 200 !important;
-      font-size: 130%;
+        width: 100%;
+        text-align: center;
+        padding-bottom: 20px;
+        font-weight: 200 !important;
+        font-size: 130%;
       }
       
       img{
-          width: 100%;
-          height: auto;
-          border-radius: 5px;
+        width: 100%;
+        height: auto;
+        border-radius: 5px;
       }
   }
-  
-  @media only screen and (max-width:770px){
-    .tabs, .tab__content{
-      width: 100%;
-    }
-  
-    
-  }
+
   
   // ############### BACKGROUND
   

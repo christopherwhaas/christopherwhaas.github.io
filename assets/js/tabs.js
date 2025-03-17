@@ -46,14 +46,12 @@ $(document).ready(function(){
 			activeTabHeight = activeTab.outerHeight();
 			
 			// Animate height of wrapper to new tab height
-			tabWrapper.stop().delay(50).animate({
+			tabWrapper.stop().animate({
 				height: activeTabHeight
-			}, 500, function() {
-				
-				// Fade in active tab
-				activeTab.delay(50).fadeIn(250);
-				
-			});
+			}, 250, function() {});
+
+			// Fade in active tab
+			activeTab.fadeIn(50);
 		});
 	});
 	

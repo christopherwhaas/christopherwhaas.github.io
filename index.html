@@ -6,11 +6,13 @@ title: Chris' Portfolio
 
   <div id="home">
     <div class="content my-auto" >
-    <h5 class="green" data-aos="fade-down" data-aos-once="true" data-aos-duration="1500">Hello, world! My name is </h5>
+    <h5 class="green" data-aos="fade-down" data-aos-once="true" data-aos-duration="1500">Hello world! My name is </h5>
       <div data-aos="fade-up" data-aos-once="true" data-aos-duration="2000">
         <h1 class="px-sm-5 pt-3" >Christopher Haas.</h1>
       <h1 class="">I like to <span class="red">build</span> things.</h1>
-      <p class="short-bio">I am a Full-Stack Software Engineer and Web Developer with a dual degree in Information Systems and Civil & Environmental Engineering from Carnegie Mellon University.</p>
+      <p class="short-bio">I am a Software Engineer with 4+ years of experience in full-stack development across enterprise and startup environments. 
+        Currently optimizing high-traffic systems handling millions transactions for the configuration of L4 networking products, with a passion for building scalable, high-performance solutions.
+      </p>
       <br><br>
       <a href="mailto:chaasdev@gmail.com" class="btn btn-outline-success" ><h5>REACH OUT</h5></a>
       </div>
@@ -32,30 +34,32 @@ title: Chris' Portfolio
 
         </div>
         <div class="col-12 col-lg-7 order-lg-1" data-aos-once="true"  data-aos="fade-up" data-aos-duration="1000">
-          <p>Hello! My name is Chris, and I am a recent grad from <a href="https://cmu.edu"  target="_blank">Carnegie Mellon University</a>. 
-            I graduated with a dual degree in Information Systems and Civil &amp; Environmental
-            Engineering with a minor in Business Administration. During my time at CMU, I was elected as a  
-            senior captain of Carnegie Mellon's Varsity football team and finished with a 3.47 GPA. Currently, I am 
-            the Chief Technology Officer and a founding member of <a href="https://www.oldsaltcoffee.com" target="_blank">Old Salt Coffee Company</a>,
-            which has been in operation since September 2020. </p>
-            <p>If I'm not in my office, you can find me at a rock climbing gym, on a hike, or at a
+          <p>Hello! My name is Chris, and I am a Software Development Engineer on the Network Load Balancing Control Plane team 
+            at Amazon Web Services! As an SDE, I work to deliver features and system improvements to the <a href="https://aws.amazon.com/elasticloadbalancing/network-load-balancer/" target="_blank">NLB product</a>!
+            I graduated from <a href="https://cmu.edu"  target="_blank">Carnegie Mellon University</a> with a dual degree in 
+            Information Systems and Civil &amp; Environmental Engineering with a minor in Business Administration. 
+            In my free time, I am a tech consultant and founding member of <a href="https://www.oldsaltcoffee.com" target="_blank">Old Salt Coffee Company</a>,
+            which has been in operation since September 2020. 
+          </p>
+          <p>If I'm not in my office, you can find me at a rock climbing gym, on a hike, or at a
             local coffee shop working on various projects. I love the outdoors and try to get out as
             much as possible. That involves anything from snowboarding to scuba diving, and anywhere in 
-            between.</p>
-            <p>These are my go-to tools:</p>
-            <div class="row mx-2">
-              <ul class="col-6">
-                <li>Ruby on Rails</li>
-                <li>HTML &amp; (S)CSS</li>
-                <li>Javascript</li>
-                <li>Liquid</li>
-              </ul>
-              <ul class="col-6">
-                <li>Swift</li>
-                <li>Python</li>
-                <li>PostgreSQL</li>
-              </ul>
-            </div>
+            between.
+          </p>
+          <p>Currently, these are some of my daily languages:</p>
+          <div class="row mx-2">
+            <ul class="col-6">
+              <li>Java</li>
+              <li>Python</li>
+              <li>Ruby</li>
+              <li>Liquid</li>
+            </ul>
+            <ul class="col-6">
+              <li>HTML &amp; (S)CSS</li>
+              <li>Javascript</li>
+              <li>SQL</li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
@@ -70,16 +74,16 @@ title: Chris' Portfolio
             
         <section class="wrapper" >
           <ul class="tabs">
-            {% for exp in site.work%}
+            {% for exp in site.work reversed%}
             <li {%if forloop.first %} class="active" {%endif%}> {{exp.short}}</li>
             {%endfor%}
           </ul>
       
           <ul class="tab__content">
-            {% for exp in site.work%}
+            {% for exp in site.work reversed%}
             <li {%if forloop.first %} class="active" {%endif%}>
               <div class="content__wrapper">
-                <h3>{{exp.name}} <a href="{{exp.link}}" target="_blank">@{{exp.company}}</a></h3>
+                <h3>{{exp.name}} @ <a href="{{exp.link}}" target="_blank">{{exp.company}}</a></h3>
                 <h6>{{exp.start}} - {{exp.end}} </h6>
                 <div class="exp-desc">
                   <p> {{ exp.content | markdownify }}</p>
@@ -105,7 +109,7 @@ title: Chris' Portfolio
       
       <div class="featured">
        
-      {%for feature in site.featured%}
+      {%for feature in site.featured reversed%}
         {% assign mod = forloop.index | modulo: 2 %}
           <div class="feature-card" data-aos-once="true"  data-aos="fade-up" data-aos-duration="1000">
             {{feature.vid}}

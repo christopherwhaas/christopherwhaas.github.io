@@ -1,0 +1,1010 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday 2025</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sniglet&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@500&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css2?family=Londrina+Sketch&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <style>
+/* Global Styles */
+.kalam-light {
+  font-family: "Kalam", cursive;
+  font-weight: 300;
+  font-style: normal;
+}
+
+h1, h2, h3 {
+    font-family: "Londrina Sketch", sans-serif;
+}
+
+body {
+  background-color: #333;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  width: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+
+body.show-envelope {
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+/* Wish Intro Styles */
+.wish-root {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: linear-gradient(180deg, #0a0e27 0%, #1a1f3a 50%, #2d1b3d 100%);
+  z-index: 1000;
+  transition: opacity 0.5s ease-out;
+}
+
+.wish-root.transitioning {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.wish-root.hidden {
+  display: none;
+}
+
+#wish-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.wish-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.wish-title {
+  font-size: clamp(2rem, 8vw, 4rem);
+  color: #ffffff;
+  text-align: center;
+  margin: 0;
+  text-shadow: 0 0 20px rgba(255, 255, 255, 0.5), 0 0 40px rgba(255, 255, 255, 0.3);
+  animation: twinkle 2s ease-in-out infinite;
+}
+
+.wish-sub {
+  font-size: clamp(1rem, 4vw, 1.5rem);
+  color: #d4d4ff;
+  text-align: center;
+  margin: 1rem 0;
+  font-family: "Kalam", cursive;
+  font-weight: 300;
+}
+
+.wish-progress {
+  font-size: clamp(0.9rem, 3.5vw, 1.2rem);
+  color: #ffd700;
+  text-align: center;
+  margin: 0.5rem 0;
+  font-family: "Roboto Mono", monospace;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 20px;
+  min-width: 150px;
+}
+
+.skip-intro {
+  pointer-events: auto;
+  margin-top: 2rem;
+  padding: 0.75rem 1.5rem;
+  font-size: 0.9rem;
+  color: #ffffff80;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 25px;
+  cursor: pointer;
+  font-family: "Kalam", cursive;
+  transition: all 0.3s ease;
+  min-height: 44px;
+  min-width: 44px;
+}
+
+.skip-intro:hover,
+.skip-intro:focus {
+  background: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.4);
+  outline: 2px solid #ffd700;
+  outline-offset: 2px;
+}
+
+@keyframes twinkle {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+/* Constellation/Completion Message */
+.constellation-message {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: clamp(1.5rem, 6vw, 3rem);
+  color: #ffffff;
+  text-align: center;
+  text-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+  animation: fadeInScale 0.5s ease-out;
+  z-index: 20;
+  font-family: "Londrina Sketch", sans-serif;
+}
+
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.5);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+/* Sparkle Effect */
+.sparkle {
+  position: absolute;
+  pointer-events: none;
+  z-index: 15;
+}
+
+.sparkle-particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: #ffd700;
+  border-radius: 50%;
+  animation: sparkleOut 0.6s ease-out forwards;
+}
+
+@keyframes sparkleOut {
+  0% {
+    opacity: 1;
+    transform: translate(0, 0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(var(--tx), var(--ty)) scale(0);
+  }
+}
+
+/* Envelope Section (reused from 2024) */
+#envelope-section {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.5s ease-in;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+#envelope-section.show {
+  visibility: visible;
+  opacity: 1;
+}
+
+.overlay {
+    background-color: #dbddf2;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 900;
+    display: flex; 
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    transform-origin: top;
+    transition: .4s;
+}
+
+.envelope {
+  position: relative;
+  cursor: pointer;
+  min-width: 44px;
+  min-height: 44px;
+}
+
+.envelope:focus {
+  outline: none;
+}
+
+.back {
+  font-family: "Singlet";
+  position: relative;
+  width:250px;
+  height: 150px;
+  background-color: #c3a981;
+}
+
+.front {
+  position: absolute;
+  border-right: 130px solid #c8b599;
+  border-top: 75px solid transparent;
+  border-bottom: 75px solid transparent;
+  height:0;
+  width:0;
+  top:0;
+  left:120px;
+  z-index:3;
+}
+
+.front:before {
+  content:"";
+  position: absolute;
+  border-left: 130px solid #c8b599;
+  border-top: 75px solid transparent;
+  border-bottom: 75px solid transparent;
+  height:0;
+  width:0;
+  top:-75px;
+  left:-120px;
+}
+
+.front:after {
+  content:"";
+  position: absolute;
+  border-bottom: 80px solid #c5b297;
+  border-left: 125px solid transparent;
+  border-right:125px solid transparent;
+  height:0;
+  width:0;
+  top:-5px;
+  left:-120px;
+}
+
+.top {
+  position: absolute;
+  border-top: 105px solid #cab08a;
+  border-left: 125px solid transparent;
+  border-right:125px solid transparent;
+  height:0;
+  width:0;
+  top:0;
+  transform-origin: top;
+  transition: .4s;
+  z-index:4;
+}
+
+.shadow {
+  position: absolute;
+  background-color: rgba(0,0,0,0.1);
+  width:250px;
+  height:10px;
+  top:220px;
+  border-radius:50%;
+}
+
+.envelope:hover .top,
+.envelope:focus .top {
+    transform: rotateX(160deg);
+}
+
+.console-container {
+  font-family:"Roboto Mono";
+  font-size:3em;
+  text-align:center;
+  margin: 20px auto;
+  width:100%;
+  display:block;
+  color:white;
+}
+
+@media (max-width: 400px) {
+    .console-container {
+        height:30px;
+    }
+}
+
+#confetti-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+/* Card Styles */
+.container {
+  max-width: 1000px;
+  margin: 20px auto;
+  padding: 0 10px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.card {
+  position: relative;
+  margin: 10px auto;
+  width: 90vw;
+  height: calc(90vw * 1.33);
+  max-width: 450px;
+  max-height: 600px;
+  background: #fff;
+  transform-style: preserve-3d;
+  transform: perspective(2000px);
+  box-shadow: inset 300px 0 50px rgba(0,0,0,.5), 0 20px 20px rgba(0,0,0,.5);
+  transition: 1s;
+}
+
+.card:hover {
+  z-index: 10000;
+  transform: perspective(2000px) rotate(-10deg);
+  box-shadow: inset 20px 0 50px rgba(0,0,0,.5), 0 10px 100px rgba(0,0,0,.5);
+}
+
+/* Desktop styles */
+@media (min-width: 768px) {
+  .container {
+    margin: 50px auto;
+  }
+  
+  .card {
+    width: 45vw;
+    height: 60vw;
+    margin: 20px;
+  }
+}
+
+.card .Box {
+  background-image: url("textured-paper.png");
+  position: relative;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  transform-origin: left;
+  z-index: 2;
+  transition: 1s cubic-bezier(.15,1.7,.84,.58);
+  background-color: #ffffff;
+}
+
+.card .Box img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: fit;
+  background-repeat: no-repeat;
+}
+
+.card:hover .Box {
+  transform: rotateY(-135deg);
+}
+
+.card .details {
+  font-size: clamp(14px, 3.5vw, 18px);
+  position: absolute;
+  top: 0;
+  left: 0;
+  box-sizing: border-box;
+  padding: 15px;
+  z-index: 1;
+  height: 100%;
+  align-content: center;
+  display: flex;
+  font-family: "Indie Flower";
+  pointer-events: none;
+}
+
+.card .details:before {
+    content: ' ';
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.6;
+  background-image: url("textured-paper.png");
+  background-color: #fff;
+  background-position: 50% 0;
+  background-size: cover;
+  z-index: -1;
+}
+
+.card .centered::-webkit-scrollbar {
+  display: none;
+}
+
+.card .centered {
+    width: 85%;
+    margin: auto;
+    display: flexbox;
+    text-align: center;
+    overflow-y: auto;
+    max-height:100%;
+    pointer-events: auto;
+    color: transparent;
+    -webkit-overflow-scrolling: touch;
+}
+
+.card:hover .centered {
+    color: inherit;
+}
+
+.card .centered h2 {
+  font-size: clamp(20px, 5vw, 32px);
+  margin: 10px 0;
+}
+
+.card .centered p {
+  line-height: 1.5;
+  font-size: clamp(14px, 3.5vw, 18px);
+}
+
+/* Bottom Action Buttons */
+.bottom-actions {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  gap: 10px;
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(20px);
+  transition: all 0.3s ease;
+}
+
+.bottom-actions.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.action-button {
+  padding: 12px 20px;
+  background: rgba(255, 255, 255, 0.95);
+  color: #333;
+  text-decoration: none;
+  border-radius: 25px;
+  font-family: "Kalam", cursive;
+  font-size: 14px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+  border: 2px solid #c3a981;
+  min-height: 44px;
+  min-width: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.action-button:hover,
+.action-button:focus {
+  background: #c3a981;
+  color: white;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+  outline: 2px solid #ffd700;
+  outline-offset: 2px;
+  transform: translateY(-2px);
+}
+
+@media (max-width: 600px) {
+  .bottom-actions {
+    bottom: 15px;
+    right: 15px;
+    gap: 8px;
+  }
+  
+  .action-button {
+    font-size: 12px;
+    padding: 10px 16px;
+  }
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  
+  .wish-title {
+    animation: none;
+  }
+  
+  .bottom-actions {
+    transition: none;
+  }
+}
+
+/* Tickets Modal */
+.tickets-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.85);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+  padding: 20px;
+  box-sizing: border-box;
+  overflow-y: auto;
+}
+
+.tickets-modal.show {
+  display: flex;
+}
+
+.tickets-container {
+  max-width: 900px;
+  width: 100%;
+  background: #f5f5f5;
+  border-radius: 20px;
+  padding: 30px 20px;
+  box-sizing: border-box;
+  position: relative;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.tickets-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.tickets-header h2 {
+  font-family: "Londrina Sketch", sans-serif;
+  font-size: clamp(24px, 6vw, 36px);
+  color: #333;
+  margin: 0 0 10px 0;
+}
+
+.tickets-header p {
+  font-family: "Kalam", cursive;
+  font-size: clamp(14px, 3vw, 16px);
+  color: #666;
+  margin: 0;
+}
+
+.close-modal {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  width: 40px;
+  height: 40px;
+  border: none;
+  background: #c3a981;
+  color: white;
+  font-size: 24px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  line-height: 1;
+}
+
+.close-modal:hover,
+.close-modal:focus {
+  background: #a68968;
+  transform: rotate(90deg);
+  outline: 2px solid #ffd700;
+}
+
+.tickets-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.ticket {
+  background: linear-gradient(135deg, #fff9e6 0%, #ffffff 100%);
+  border: 3px dashed #c3a981;
+  border-radius: 15px;
+  padding: 20px;
+  position: relative;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.ticket:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+.ticket::before,
+.ticket::after {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background: #f5f5f5;
+  border-radius: 50%;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.ticket::before {
+  left: -11px;
+}
+
+.ticket::after {
+  right: -11px;
+}
+
+.ticket-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+  padding-bottom: 15px;
+  border-bottom: 2px dotted #c3a981;
+}
+
+.ticket-number {
+  font-family: "Roboto Mono", monospace;
+  font-size: clamp(12px, 2.5vw, 14px);
+  color: #999;
+  font-weight: 500;
+}
+
+.ticket-emoji {
+  font-size: clamp(24px, 5vw, 32px);
+}
+
+.ticket-content {
+  text-align: center;
+}
+
+.ticket-title {
+  font-family: "Londrina Sketch", sans-serif;
+  font-size: clamp(20px, 4.5vw, 28px);
+  color: #333;
+  margin: 0 0 10px 0;
+}
+
+.ticket-description {
+  font-family: "Kalam", cursive;
+  font-size: clamp(14px, 3vw, 16px);
+  color: #666;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.ticket-footer {
+  margin-top: 15px;
+  padding-top: 15px;
+  border-top: 2px dotted #c3a981;
+  text-align: center;
+}
+
+.ticket-validity {
+  font-family: "Kalam", cursive;
+  font-size: clamp(12px, 2.5vw, 14px);
+  color: #999;
+  font-style: italic;
+}
+
+@media (max-width: 600px) {
+  .tickets-container {
+    padding: 20px 15px;
+  }
+  
+  .ticket {
+    padding: 15px;
+  }
+  
+  .ticket::before,
+  .ticket::after {
+    width: 15px;
+    height: 15px;
+  }
+  
+  .ticket::before {
+    left: -9px;
+  }
+  
+  .ticket::after {
+    right: -9px;
+  }
+}
+    </style>
+</head>
+<body>
+  <!-- Wish Intro Section -->
+  <section id="wish-root" class="wish-root" data-state="init" role="main">
+    <canvas id="wish-canvas" aria-hidden="true"></canvas>
+    <div class="wish-overlay" role="group" aria-label="Make a wish">
+      <h1 class="wish-title">Make a wish ✨</h1>
+      <p class="wish-sub">Tap 3 shooting stars to continue</p>
+      <p id="wish-progress" class="wish-progress" aria-live="polite">Caught 0 of 3</p>
+      <button id="skip-intro" class="skip-intro" tabindex="0" aria-label="Skip intro and go directly to card">Skip intro</button>
+    </div>
+  </section>
+
+  <!-- Envelope Section -->
+  <section id="envelope-section" aria-hidden="true">
+    <div class="overlay" id="overlay"> 
+      <div class="envelope" 
+           id="envelope" 
+           role="button" 
+           tabindex="0" 
+           aria-label="Open birthday card envelope"
+           aria-expanded="false"
+           aria-controls="card-content">
+        <div class="back"></div>
+        <div class="front"></div>
+        <div class="top" id="letter-top"></div>
+        <h2 style="width: 100%;">To Mom ♥️</h2>
+        <div class="shadow"></div>
+      </div>
+    </div>
+    
+    <div class='console-container' 
+         role="button"
+         tabindex="0"
+         aria-label="Press and hold for confetti"
+         onmousedown="startConfetti();" 
+         onmouseup="stopConfetti();"
+         ontouchstart="startConfetti();"
+         ontouchend="stopConfetti();">
+      <span id='text'></span>
+    </div>    
+    
+    <div class="container" id="card-content">
+      <div class="card">
+        <div class="Box">
+          <img src="birthday2025.png" alt="Birthday card front">
+        </div>
+        <div class="details">
+          <div class="centered kalam-light">
+            <h2>Happy Birthday Mom!</h2>
+            <p>
+              I love you! Congrats on being 6 months away from penalty free retirement withdrawals!
+              <br><br>
+              I'm sorry I couldn't be there in person but I promise I will be soon! I am very excited to come visit and see the new place (and you :) )!
+              <br><br>
+              Even though I don't always show it, I am very grateful for the weekly calls and catch up time.  
+              <br><br>
+              Attached to this card are tickets to FaceTime lunch dates that you can use to schedule with me any day throughout the week (unless I really can't on one day, but I'll try my best to make it work) 
+              <br><br>
+              Love you and happy birthday!
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Bottom Action Buttons -->
+  <div class="bottom-actions" id="bottom-actions">
+    <button class="action-button" 
+            id="tickets-button"
+            aria-label="View lunch date tickets">
+      🎁 Tickets
+    </button>
+    <a href="archives.html" 
+       class="action-button" 
+       aria-label="View past birthday cards in archives">
+      📚 Archives
+    </a>
+  </div>
+
+  <!-- Tickets Modal -->
+  <div class="tickets-modal" id="tickets-modal" role="dialog" aria-modal="true" aria-labelledby="tickets-modal-title">
+    <div class="tickets-container">
+      <button class="close-modal" id="close-modal" aria-label="Close tickets modal">×</button>
+      
+      <div class="tickets-header">
+        <h2 id="tickets-modal-title">🎟️ FaceTime Lunch Date Tickets 🎟️</h2>
+        <p>Redeem anytime for a virtual lunch date!</p>
+      </div>
+      
+      <div class="tickets-grid">
+        <div class="ticket">
+          <div class="ticket-header">
+            <span class="ticket-number">TICKET #001</span>
+            <span class="ticket-emoji">🍕</span>
+          </div>
+          <div class="ticket-content">
+            <h3 class="ticket-title">FaceTime Lunch Date</h3>
+            <p class="ticket-description">
+              One ticket for a virtual lunch date! Just let me know when and I'll make it work.
+            </p>
+          </div>
+          <div class="ticket-footer">
+            <p class="ticket-validity">Valid any day of the week • No expiration</p>
+          </div>
+        </div>
+        
+        <div class="ticket">
+          <div class="ticket-header">
+            <span class="ticket-number">TICKET #002</span>
+            <span class="ticket-emoji">🍜</span>
+          </div>
+          <div class="ticket-content">
+            <h3 class="ticket-title">FaceTime Lunch Date</h3>
+            <p class="ticket-description">
+              One ticket for a virtual lunch date! Just let me know when and I'll make it work.
+            </p>
+          </div>
+          <div class="ticket-footer">
+            <p class="ticket-validity">Valid any day of the week • No expiration</p>
+          </div>
+        </div>
+        
+        <div class="ticket">
+          <div class="ticket-header">
+            <span class="ticket-number">TICKET #003</span>
+            <span class="ticket-emoji">🥗</span>
+          </div>
+          <div class="ticket-content">
+            <h3 class="ticket-title">FaceTime Lunch Date</h3>
+            <p class="ticket-description">
+              One  ticket for a virtual lunch date! Just let me know when and I'll make it work.
+            </p>
+          </div>
+          <div class="ticket-footer">
+            <p class="ticket-validity">Valid any day of the week • No expiration</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="confetti.js"></script>
+  <script src="../assets/js/birthday-2025.js" defer></script>
+  <script>
+    // Envelope open handler
+    function openLetter() {
+      var overlay = document.getElementById('overlay');
+      var envelope = document.getElementById('envelope');
+      
+      overlay.style.top = "120vh";
+      envelope.setAttribute('aria-expanded', 'true');
+      
+      startConfetti();
+      
+      window.setTimeout(function() {
+        stopConfetti();
+      }, 2000);
+      
+      // Center the view on the card after envelope slides up
+      window.setTimeout(function() {
+        var card = document.querySelector('.card');
+        if (card) {
+          // Scroll to center the card vertically
+          var cardRect = card.getBoundingClientRect();
+          var scrollY = window.pageYOffset + cardRect.top - (window.innerHeight / 2) + (cardRect.height / 2);
+          
+          window.scrollTo({
+            top: Math.max(0, scrollY),
+            behavior: 'smooth'
+          });
+        }
+        
+        // Show bottom action buttons
+        var bottomActions = document.getElementById('bottom-actions');
+        if (bottomActions) {
+          bottomActions.classList.add('show');
+        }
+      }, 500);
+    }
+    
+    // Tickets modal functions
+    function openTicketsModal() {
+      var modal = document.getElementById('tickets-modal');
+      if (modal) {
+        modal.classList.add('show');
+        document.body.style.overflow = 'hidden';
+        
+        // Focus on close button for accessibility
+        setTimeout(function() {
+          document.getElementById('close-modal')?.focus();
+        }, 100);
+      }
+    }
+    
+    function closeTicketsModal() {
+      var modal = document.getElementById('tickets-modal');
+      if (modal) {
+        modal.classList.remove('show');
+        document.body.style.overflow = 'auto';
+        
+        // Return focus to tickets button
+        document.getElementById('tickets-button')?.focus();
+      }
+    }
+    
+    // Setup envelope interaction
+    document.addEventListener('DOMContentLoaded', function() {
+      var envelope = document.getElementById('envelope');
+      if (envelope) {
+        envelope.addEventListener('click', openLetter);
+        envelope.addEventListener('keydown', function(e) {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            openLetter();
+          }
+        });
+      }
+      
+      // Setup tickets modal
+      var ticketsButton = document.getElementById('tickets-button');
+      if (ticketsButton) {
+        ticketsButton.addEventListener('click', openTicketsModal);
+      }
+      
+      var closeButton = document.getElementById('close-modal');
+      if (closeButton) {
+        closeButton.addEventListener('click', closeTicketsModal);
+      }
+      
+      // Close modal on backdrop click
+      var modal = document.getElementById('tickets-modal');
+      if (modal) {
+        modal.addEventListener('click', function(e) {
+          if (e.target === modal) {
+            closeTicketsModal();
+          }
+        });
+      }
+      
+      // Close modal on Escape key
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+          var modal = document.getElementById('tickets-modal');
+          if (modal && modal.classList.contains('show')) {
+            closeTicketsModal();
+          }
+        }
+      });
+    });
+  </script>
+</body>
+</html>
+

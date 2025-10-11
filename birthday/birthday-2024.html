@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sniglet&display=swap" rel="stylesheet"> 
+
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap" rel="stylesheet"> 
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@500&display=swap" rel="stylesheet"> 
+
+<link href="https://fonts.googleapis.com/css2?family=Londrina+Sketch&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+
+
+.kalam-light {
+  font-family: "Kalam", cursive;
+  font-weight: 300;
+  font-style: normal;
+}
+
+h1, h2, h3 {
+    font-family: "Londrina Sketch", sans-serif;
+}
+
+h1{
+    text-align: center;
+    font-size: 4vw;
+    text-shadow: rgba(0, 0, 0, 0.201) 2px 2px 2px;
+}
+
+html{
+    background-color: #333;
+}
+
+
+.container
+{
+  max-width: 1000px;
+  margin: 50px auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+.card
+{
+    
+  position: relative;
+  margin: 20px;
+  width: 45vw;
+  height: 60vw;
+  max-width:450px;
+  max-height:600px;
+  min-width: 300px;
+  min-height: 400px;
+  background: #fff;
+  transform-style: preserve-3d;
+  transform: perspective(2000px);
+  box-shadow: inset 300px 0 50px rgba(0,0,0,.5), 0 20px 20px rgba(0,0,0,.5);
+  transition: 1s;
+}
+.card:hover
+{
+  z-index: 10000;
+  transform: perspective(2000px) rotate(-10deg);
+  box-shadow: inset 20px 0 50px rgba(0,0,0,.5), 0 10px 100px rgba(0,0,0,.5);
+}
+
+.card .Box
+{
+  background-image: url("textured-paper.png");
+  position: relative;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  position: relative;
+  transform-origin: left;
+  z-index: 2;
+  transition: 1s cubic-bezier(.15,1.7,.84,.58);
+  background-color: #ffffff;
+}
+.card .Box img
+{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: fit;
+  background-repeat: no-repeat;
+}
+.card:hover .Box
+{
+  transform: rotateY(-135deg);
+}
+.card .details
+{
+  font-size: 3.5vw;
+  position: absolute;
+  top: 0;
+  left: 0;
+  box-sizing: border-box;
+  padding: 10px;
+  z-index: 1;
+  height: 100%;
+  align-content: center;
+  display: flex;
+ 
+  font-family: "Indie Flower";
+
+}
+
+.card .details:before{
+    content: ' ';
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.6;
+  background-image: url("textured-paper.png");
+  background-color: #fff;
+  background-position: 50% 0;
+  background-size: cover;
+  z-index: -1;
+
+}
+
+.card .centered::-webkit-scrollbar {
+  display: none;
+  
+  
+}
+
+.card .centered{
+    width: 80%;
+    margin: auto;
+    display: flexbox;
+    text-align: center;
+    overflow-y: auto;
+    max-height:100%;
+
+}
+.hidden {
+  opacity:0;
+}
+
+.console-container {
+ 
+  font-family:"Roboto Mono";
+  font-size:3em;
+  text-align:center;
+  margin: 20px auto;
+
+  width:100%;
+  display:block;
+  
+  color:white;
+
+
+}
+
+@media (max-width: 400px) {
+    .console-container {
+ 
+        height:30px;
+    }
+        
+
+}
+
+.console-underscore {
+   display:inline-block;
+  position:relative;
+  top:0;
+  left:0px;
+}
+
+#confetti-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+}
+
+.ps{
+
+    text-align: center;
+    font-family: "Montserrat";
+    color: #17cb1a;
+
+}
+
+.envelope {
+  position: relative;
+  cursor: pointer;
+}
+
+.back {
+  font-family: "Singlet";
+  position: relative;
+  width:250px;
+  height: 150px;
+  background-color: #c3a981;
+}
+
+
+.front {
+  position: absolute;
+  border-right: 130px solid #c8b599;
+  border-top: 75px solid transparent;
+  border-bottom: 75px solid transparent;
+  height:0;
+  width:0;
+  top:0;
+  left:120px;
+  z-index:3;
+}
+
+.front:before {
+  content:"";
+  position: absolute;
+  border-left: 130px solid #c8b599;
+  border-top: 75px solid transparent;
+  border-bottom: 75px solid transparent;
+  height:0;
+  width:0;
+  top:-75px;
+  left:-120px;
+}
+
+.front:after {
+  content:"";
+  position: absolute;
+  border-bottom: 80px solid #c5b297;
+  border-left: 125px solid transparent;
+  border-right:125px solid transparent;
+  height:0;
+  width:0;
+  top:-5px;
+  left:-120px;
+}
+
+.top {
+  position: absolute;
+  border-top: 105px solid #cab08a;
+  border-left: 125px solid transparent;
+  border-right:125px solid transparent;
+  height:0;
+  width:0;
+  top:0;
+  transform-origin: top;
+  transition: .4s;
+  z-index:4;
+}
+
+.shadow {
+  position: absolute;
+  background-color: rgba(0,0,0,0.1);
+  width:250px;
+  height:10px;
+  top:220px;
+  border-radius:50%;
+}
+
+.envelope:hover .top {
+    transform: rotateX(160deg);
+}
+
+
+.overlay{
+    background-color: #dbddf2;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 900;
+    display: flex; 
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    transform-origin: top;
+    transition: .4s;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+body {
+  background-color: #333;
+  margin: 0;
+}
+
+#balloon-overlay{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  visibility: visible;
+}
+
+#base-overlay {
+  visibility: hidden;
+  width: 100%;
+  height: 100%;
+}
+
+.fade-in{
+  animation: fadeIn 5s;
+}
+
+.fade-out{
+  animation: fadeOut 3s;
+}
+
+@keyframes fadeIn {
+  0% { opacity: 0.1; }
+  100% { opacity: 0.6; }
+}
+
+@keyframes fadeOut {
+  0% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+.show {
+  display: block;
+  visibility: visible !important;
+}
+
+.hide {
+  display: none;
+  visibility: hidden;
+}
+
+/* Balloons */
+
+.balloonContainer{
+  position: absolute;
+  top: 15vh;
+  height: 130px;
+  width: 110px;
+  z-index: 10;
+}
+.balloonContainer img{
+  position: relative;
+  width: 100%;
+  z-index: 10;
+}
+.balloonContainer:hover{
+  cursor: pointer;
+}
+
+#balloonContainer1{
+  transform: rotate(-30deg);
+  margin-left: calc(50vw - 60px - 150px);
+}
+
+#balloonContainer2{
+  transform: rotate(-15deg);
+  margin-left: calc(50vw - 60px - 50px);
+}
+
+#balloonContainer3{
+  transform: rotate(15deg);
+  margin-left: calc(50vw - 60px + 50px);
+}
+
+#balloonContainer4{
+  transform: rotate(30deg);
+  margin-left: calc(50vw - 60px + 150px);
+}
+
+#balloon:hover, #balloon2:hover, #balloon3:hover, #balloon4:hover {
+  cursor: pointer;
+  animation: wiggle .4s infinite;
+}
+.blue_particle{
+  background-color: #173093;
+}
+.yellow_particle{
+  background-color: #F6DA07;
+}
+.red_particle{
+  background-color: #b41c1c;
+}
+.green_particle{
+  background-color: #0c7008;
+}
+.purple_particle{
+  background-color: #6c1c9b;
+}
+.orange_particle{
+  background-color: #f68607;
+}
+#particle1, #particle2, #particle3, #particle4, #particle5, #particle6,
+ #particle1b, #particle2b, #particle3b, #particle4b, #particle5b, #particle6b,
+ #particle1c, #particle2c, #particle3c, #particle4c, #particle5c, #particle6c,
+ #particle1d, #particle2d, #particle3d, #particle4d, #particle5d, #particle6d {
+  width: 5px;
+  height: 20px;
+  border-radius: 50px;
+  position: absolute;
+  top: 70px;
+  left: 60px;
+  transition: all .7s ease-out;
+  z-index: 1;
+}
+#particle2, #particle2b, #particle2c, #particle2d{
+  transform: rotate(72deg);
+}
+#particle3, #particle3b, #particle3c, #particle3d{
+  transform: rotate(144deg);
+}
+#particle4, #particle4b, #particle4c, #particle4d{
+  transform: rotate(216deg);
+}
+#particle5, #particle5b, #particle5c, #particle5d{
+  transform: rotate(288deg);
+}
+.makeappear{
+  animation: appear .6s forwards;
+}
+.animateParticle1{
+  position: absolute !important;
+  top: 150px !important;
+  opacity: 0 !important;
+  width: 0px !important;
+  height: 0px !important;
+}
+.animateParticle2{
+  position: absolute !important;
+  top: -20px !important;
+  left: 170px !important;
+  opacity: 0 !important;
+  width: 0px !important;
+  height: 0px !important;
+}
+.animateParticle3{
+  position: absolute !important;
+  top: 185px !important;
+  left: 170px !important;
+  opacity: 0 !important;
+  width: 0px !important;
+  height: 0px !important;
+}
+.animateParticle4{
+  position: absolute !important;
+  top: 185px !important;
+  left: -170px !important;
+  opacity: 0 !important;
+  width: 0px !important;
+  height: 0px !important;
+}
+.animateParticle5{
+  position: absolute !important;
+  top: -20px !important;
+  left: -170px !important;
+  opacity: 0 !important;
+  width: 0px !important;
+  height: 0px !important;
+}
+.animateParticle6{
+  position: absolute !important;
+  top: -170px !important;
+  opacity: 0 !important;
+  width: 0px !important;
+  height: 0px !important;
+}
+@keyframes wiggle{
+  0%{transform: translate(0,0);}
+  30%{transform: translate(-2px,0);}
+  50%{transform: translate(0px,0);}
+  60%{transform: translate(2px,0);}
+  70%{transform: translate(0px,0);}
+  100%{transform: translate(0px,0);}
+}
+@keyframes appear{
+  0%{opacity: 0; transform: scale(.2);}
+  100%{opacity: 1; transform: scale(1)}
+}
+
+#cake {
+  position: absolute;
+  top: 50vh;
+  left: calc(50vw - 125px);
+  z-index: 90;
+}
+
+.birthday-cake {
+  position: relative; 
+  top:20px;
+}
+
+.cake {
+  position:absolute;
+  overflow:hidden;
+  width:250px;
+  height:140px;
+  background-color: #FAD7A0;
+  left:0px;
+  z-index:1;
+  border-radius:30px 30px 0 0;  
+}
+
+.cake:before {
+  content:"";
+  background-color: #935116;
+  width:250px;
+  height:15px;
+  position:absolute;
+  top:75px;
+  z-index:1;
+  box-shadow: 0 30px #935116;
+}
+
+.cake:after {
+  content:"";
+  position: absolute;
+  background-color: #573612;
+  width:250px;
+  height:40px;
+  z-index:1;
+  box-shadow:inset 0 10px rgba(0,0,0,0.07);
+}
+
+.chocolate {
+  position:absolute; 
+  background-color: #573612;
+  width:25px;
+  height:45px;
+  top:25px;
+  left:0;
+  z-index:2;
+  border-radius:50px;
+  box-shadow: 25px 2px #FAD7A0, 50px -10px #573612, 75px -5px #FAD7A0, 100px 3px #573612, 125px 0 #FAD7A0, 150px -5px #573612, 175px 3px #FAD7A0, 200px -5px #573612, 225px -10px #FAD7A0, 250px 4px #573612;
+}
+
+.candle {
+  position:absolute; 
+  width: 15px;
+  height:70px;
+  background-color: white;
+  top:-60px;
+  left:118.5px;
+  z-index: 0;
+  box-shadow:inset 0 -10px 0 #E74C3C;
+}
+
+.candle:before {
+  position:absolute;
+  width:15px;
+  height:15px;
+  background-color:#E74C3C;
+  content:"";
+  top:10px;
+  z-index: 0;
+  box-shadow: 0 25px #E74C3C;
+}
+
+.candle:after {
+  content:"";
+  width:2px;
+  height:15px;
+  content:"";
+  position:absolute;
+  background-color:black;
+  top:-15px;
+  left:6px;
+  z-index: 0;
+}
+
+.flame-container {
+  position: absolute;
+  left:115px;
+  top:-100px;
+}
+
+.flame {
+  position:relative;
+  background-color: #F4D03F;
+  opacity:0.9;
+  box-shadow:inset 0 -5px 5px #D35400, 5px -5px 20px #FBFFA3;
+  width:20px;
+  height:30px;
+  border-radius:50%;
+  animation: flame 0.5s infinite;
+    
+}
+@keyframes flame {
+  from, to { transform: scale(1, 1); }
+  25% { transform: scale(0.9, 1.1); }
+  50% { transform: scale(1.1, 0.9); }
+  75% { transform: scale(0.95, 1.05); }
+}
+
+
+    </style>
+</head>
+<body >
+  <div id="balloon-overlay">
+    <h1 style="margin: 5px 0; color: #f5eed9;text-align: center;">Pop your balloons!</h1>
+    <div>
+      <div class="balloonContainer" id="balloonContainer1">
+        <img id="balloon" src="yellow_balloon.png" onclick="popIt()">
+      <div id="particle1" class="blue_particle"></div>
+      <div id="particle2" class="red_particle"></div>
+      <div id="particle3" class="green_particle"></div>
+      <div id="particle4" class="yellow_particle"></div>
+      <div id="particle5" class="purple_particle"></div>
+      <div id="particle6" class="orange_particle"></div>
+      </div>
+      <div class="balloonContainer" id="balloonContainer2">
+         <img id="balloon2" src="green_balloon.png" onclick="popIt2()">
+      <div id="particle1b" class="blue_particle"></div>
+      <div id="particle2b" class="red_particle"></div>
+      <div id="particle3b" class="green_particle"></div>
+      <div id="particle4b" class="yellow_particle"></div>
+      <div id="particle5b" class="purple_particle"></div>
+      <div id="particle6b" class="orange_particle"></div>
+      </div>
+      <div class="balloonContainer" id="balloonContainer3">
+        <img id="balloon3" src="pink_balloon.png" onclick="popIt3()">
+      <div id="particle1c" class="blue_particle"></div>
+      <div id="particle2c" class="red_particle"></div>
+      <div id="particle3c" class="green_particle"></div>
+      <div id="particle4c" class="yellow_particle"></div>
+      <div id="particle5c" class="purple_particle"></div>
+      <div id="particle6c" class="orange_particle"></div>
+      </div>
+      <div class="balloonContainer" id="balloonContainer4">
+         <img id="balloon4" src="blue_balloon.png" onclick="popIt4()">
+      <div id="particle1d" class="blue_particle"></div>
+      <div id="particle2d" class="red_particle"></div>
+      <div id="particle3d" class="green_particle"></div>
+      <div id="particle4d" class="yellow_particle"></div>
+      <div id="particle5d" class="purple_particle"></div>
+      <div id="particle6d" class="orange_particle"></div>
+      </div>
+    </div>
+    <div id="cake">
+      <div class="birthday-cake">
+        <div class="cake">
+          <div class="chocolate"></div>
+         </div>
+        <div class="candle"></div>
+        <div class="flame-container">
+          <div class="flame"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+
+  <div id="base-overlay">
+    <div class="overlay" id="overlay"> 
+        
+        <div class="envelope" onclick="openLetter();">
+            <div class="back">
+                
+            </div>
+            
+            <div class="front"></div>
+            <div class="top" id="letter-top"></div>
+            <h2 style="width: 100%;">To Mom ♥️</h2>
+            <div class="shadow"></div>
+        </div>
+
+    </div>
+    <div class='console-container' onmousedown="startConfetti();" onmouseup="stopConfetti();"><span id='text'></span></div>    
+    
+    <div class="container">
+        <div class="card">
+            <div class="Box">
+                <img src="tiniCard.png">
+            </div>
+            <div class="details">
+                <div class="centered kalam-light">
+                  <h2>Happy Birthday!</h2>
+                  <p>
+                  I love you and miss you, I hope you have the best birthday!
+                  <br> 
+                  Thanks for being the best mom ever, even if we don't always agree on what "the best mom ever" entails :)
+                  <br>
+                  Sorry for being a busy son this year but I'll be quitting my job and be way better next year.
+                  <br>
+                  I love and miss you and I am looking forward to visiting in December! 
+                  <br>
+                  Love you and happy birthday!
+                  <br>
+                  <br>
+                  p.s. these are saved in archives <a href="archives.html">here</a> so you don't have to lug them around with you everytime you move :) 
+                  </p>
+                </div>
+              
+            </div>
+          </div>
+          
+      </div>
+      <script src="confetti.js"></script>
+      <script>
+        var count=0;
+        function popIt(){
+          document.getElementById("balloon").style.display = "none";
+          document.getElementById("particle1").className = "animateParticle1";
+          document.getElementById("particle2").className = "animateParticle2";
+          document.getElementById("particle3").className = "animateParticle3";
+          document.getElementById("particle4").className = "animateParticle4";
+          document.getElementById("particle5").className = "animateParticle5";
+          document.getElementById("particle6").className = "animateParticle6";
+          count += 1;
+          checkCount(count);
+        };
+
+
+        function popIt2(){
+          document.getElementById("balloon2").style.display = "none";
+          document.getElementById("particle1b").className = "animateParticle1";
+          document.getElementById("particle2b").className = "animateParticle2";
+          document.getElementById("particle3b").className = "animateParticle3";
+          document.getElementById("particle4b").className = "animateParticle4";
+          document.getElementById("particle5b").className = "animateParticle5";
+          document.getElementById("particle6b").className = "animateParticle6";
+          count += 1;
+          checkCount(count);
+        };
+
+        function popIt3(){
+          document.getElementById("balloon3").style.display = "none";
+          document.getElementById("particle1c").className = "animateParticle1";
+          document.getElementById("particle2c").className = "animateParticle2";
+          document.getElementById("particle3c").className = "animateParticle3";
+          document.getElementById("particle4c").className = "animateParticle4";
+          document.getElementById("particle5c").className = "animateParticle5";
+          document.getElementById("particle6c").className = "animateParticle6";
+          count += 1;
+          checkCount(count);
+        };
+
+        function popIt4(){
+          document.getElementById("balloon4").style.display = "none";
+          document.getElementById("particle1d").className = "animateParticle1";
+          document.getElementById("particle2d").className = "animateParticle2";
+          document.getElementById("particle3d").className = "animateParticle3";
+          document.getElementById("particle4d").className = "animateParticle4";
+          document.getElementById("particle5d").className = "animateParticle5";
+          document.getElementById("particle6d").className = "animateParticle6";
+          count += 1;
+          checkCount(count);
+        };
+
+        function checkCount(count){
+          if (count == 4){
+            setTimeout(function() {
+            document.querySelector('#balloon-overlay').remove();
+            document.querySelector('#base-overlay').classList.add('show');
+            }, 400);
+          } 
+        }
+
+        function openLetter(){
+            var overlay = document.getElementById('overlay');
+
+            var top = document.getElementById('letter-top');
+
+            overlay.style.top = "120vh";
+            
+            startConfetti();
+
+            window.setInterval(function() {
+            stopConfetti();
+            }, 2000)
+
+          }
+          
+      </script>
+    </div>
+        
+</body>
+</html>

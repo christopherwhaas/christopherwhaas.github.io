@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#2b1055">
+  <title>Happy Birthday 2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Londrina+Sketch&family=Kalam:wght@300;400;700&family=Roboto+Mono:wght@500&display=swap" rel="stylesheet">
+  <style>
+/* ------------------------------------------------------------------ */
+/* Theme                                                               */
+/* ------------------------------------------------------------------ */
+:root {
+  --sand: #f7ecd6;
+  --sand-deep: #efdcb8;
+  --kraft: #d9b98e;
+  --kraft-dark: #c6a274;
+  --kraft-light: #e6cda8;
+  --ink: #3b2f2f;
+  --ink-soft: #6b5d55;
+  --coral: #ff7a59;
+  --sunset-pink: #ff5e8a;
+  --sunset-purple: #5b2a86;
+  --night: #2b1055;
+  --ocean: #1b7f9e;
+  --gold: #ffd166;
+  --leaf: #2f9e6a;
+
+  /* Card is a 5x7 portrait. Fit to width on phones, cap on desktop,
+     and never taller than ~68% of the viewport. */
+  --card-w: min(82vw, 400px, calc(68vh / 1.4));
+  --card-h: calc(var(--card-w) * 1.4);
+  /* Envelope is slightly smaller than the card; the card scales down
+     to sit inside it and slides out when opened. */
+  --env-w: calc(var(--card-w) * 0.86);
+  --env-h: calc(var(--env-w) * 1.3);
+
+  --cu: calc(var(--card-w) / 100);   /* "card unit": 1% of card width, for type that must scale with the card */
+
+  --mini-scale: 0.7;        /* overwritten by JS */
+  --card-dx: 0%;
+  --card-dy: 0%;
+  --card-s: var(--mini-scale);
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden;
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  background: var(--night);
+  color: var(--ink);
+  font-family: "Kalam", cursive;
+  font-weight: 300;
+}
+
+h1, h2, h3 { font-family: "Londrina Sketch", sans-serif; font-weight: 400; margin: 0; }
+
+::-webkit-scrollbar { display: none; }
+
+.visually-hidden {
+  position: absolute; width: 1px; height: 1px; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+
+/* ------------------------------------------------------------------ */
+/* Screen 1: String a lei                                               */
+/* ------------------------------------------------------------------ */
+.intro {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: var(--night);
+  transition: opacity 0.6s ease-out;
+}
+.intro.transitioning { opacity: 0; pointer-events: none; }
+.intro.hidden { display: none; }
+
+#intro-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  touch-action: none;   /* no double-tap zoom / scroll while catching flowers */
+  cursor: pointer;
+}
+
+.intro-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: max(7vh, env(safe-area-inset-top));
+  pointer-events: none;
+  z-index: 10;
+  text-align: center;
+}
+
+.intro-title {
+  font-size: clamp(2.4rem, 11vw, 4.5rem);
+  color: #fff;
+  text-shadow: 0 2px 0 rgba(0,0,0,.15), 0 0 30px rgba(255, 209, 102, .55);
+  line-height: 1;
+}
+
+.intro-sub {
+  margin: 0.6rem 1.5rem 0;
+  font-size: clamp(1rem, 4.2vw, 1.35rem);
+  color: #ffe9d6;
+  text-shadow: 0 1px 2px rgba(0,0,0,.3);
+}
+
+.intro-progress {
+  margin: 0.9rem 0 0;
+  padding: 0.4rem 1rem;
+  font-family: "Roboto Mono", monospace;
+  font-size: clamp(0.85rem, 3.4vw, 1.05rem);
+  color: var(--gold);
+  background: rgba(20, 8, 40, .45);
+  border-radius: 999px;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+.intro-skip {
+  pointer-events: auto;
+  position: absolute;
+  bottom: max(18px, env(safe-area-inset-bottom));
+  right: 18px;
+  min-height: 44px;
+  padding: 0.5rem 1.1rem;
+  font-family: "Kalam", cursive;
+  font-size: 0.95rem;
+  color: rgba(255,255,255,.75);
+  background: rgba(20, 8, 40, .35);
+  border: 1px solid rgba(255,255,255,.25);
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background .2s, color .2s;
+}
+.intro-skip:hover, .intro-skip:focus-visible {
+  background: rgba(20, 8, 40, .6);
+  color: #fff;
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+}
+
+.intro-message {
+  position: absolute;
+  left: 50%;
+  top: 44%;
+  transform: translate(-50%, -50%);
+  width: min(90vw, 560px);
+  text-align: center;
+  color: #fff;
+  z-index: 20;
+  animation: popIn .6s cubic-bezier(.2, 1.4, .4, 1) both;
+  text-shadow: 0 2px 0 rgba(0,0,0,.2), 0 0 30px rgba(255, 209, 102, .6);
+}
+.intro-message h2 { font-size: clamp(2rem, 9vw, 3.6rem); line-height: 1.05; }
+.intro-message p  { margin: .5rem 0 0; font-size: clamp(1rem, 4.2vw, 1.35rem); color: #ffe9d6; }
+
+@keyframes popIn {
+  from { opacity: 0; transform: translate(-50%, -50%) scale(.6); }
+  to   { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+}
+
+/* ------------------------------------------------------------------ */
+/* Screen 2 + 3: Envelope -> Card (one continuous "stage")              */
+/* ------------------------------------------------------------------ */
+.stage {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background:
+    radial-gradient(120% 80% at 50% 0%, #fff8ea 0%, var(--sand) 55%, var(--sand-deep) 100%);
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity .6s ease-in;
+}
+.stage.show { visibility: visible; opacity: 1; }
+
+/* The group is the envelope's footprint; the card is centered on it. */
+.env-group {
+  position: relative;
+  width: var(--env-w);
+  height: var(--env-h);
+  perspective: 1200px;
+  /* sit a touch below center so the opened flap has room above */
+  transform: translateY(4vh);
+  transition: transform .9s ease-in-out;
+}
+.stage.card-full .env-group { transform: translateY(0); }
+
+.env-part {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  transition: transform .8s cubic-bezier(.5, 0, .75, 0), opacity .5s ease .3s;
+}
+.stage.env-away .env-part { transform: translateY(130vh) !important; opacity: 0; }
+
+.env-back {
+  top: 0; height: 100%;
+  background: linear-gradient(180deg, var(--kraft-light), var(--kraft));
+  border-radius: 6px;
+  z-index: 1;
+  box-shadow: 0 24px 40px -18px rgba(60, 40, 20, .45);
+}
+
+.env-front {
+  top: 0; height: 100%;
+  background: linear-gradient(180deg, var(--kraft-dark) 0%, var(--kraft) 60%, var(--kraft-light) 100%);
+  clip-path: polygon(0 0, 50% 46%, 100% 0, 100% 100%, 0 100%);
+  border-radius: 6px;
+  z-index: 3;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: 11%;
+}
+/* crease lines on the pocket */
+.env-front::before, .env-front::after {
+  content: "";
+  position: absolute;
+  top: 0; width: 50%; height: 46%;
+  pointer-events: none;
+}
+.env-front::before { left: 0;  background: linear-gradient(to bottom right, transparent 49.4%, rgba(90,60,30,.18) 50%, transparent 51%); }
+.env-front::after  { right: 0; background: linear-gradient(to bottom left,  transparent 49.4%, rgba(90,60,30,.18) 50%, transparent 51%); }
+
+.env-to {
+  font-family: "Londrina Sketch", sans-serif;
+  font-size: clamp(1.6rem, 8vw, 2.4rem);
+  color: #5a3f24;
+  letter-spacing: .02em;
+}
+
+.env-flap {
+  top: 0; height: 48%;   /* deeper than the pocket notch (46%) so nothing peeks through */
+  background: linear-gradient(180deg, var(--kraft-light) 0%, var(--kraft) 100%);
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  transform-origin: top center;
+  z-index: 4;
+  transition: transform .75s cubic-bezier(.45, 0, .2, 1);
+}
+.stage.flap-open  .env-flap { transform: rotateX(180deg); }
+.stage.flap-behind .env-flap { z-index: 0; }
+
+.env-seal {
+  position: absolute;
+  left: 50%;
+  top: 48%;
+  width: clamp(40px, 13vw, 54px);
+  height: clamp(40px, 13vw, 54px);
+  transform: translate(-50%, -55%);
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #ff8fa8, var(--sunset-pink) 60%, #c73a63);
+  box-shadow: 0 3px 6px rgba(0,0,0,.25), inset 0 0 0 3px rgba(255,255,255,.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Londrina Sketch", sans-serif;
+  font-size: clamp(20px, 6.5vw, 27px);
+  color: #fff;
+  text-shadow: 0 1px 0 rgba(0,0,0,.25);
+  z-index: 5;
+  pointer-events: none;   /* decorative; the .envelope-hit button handles taps */
+  transition: transform .4s ease, opacity .4s ease;
+}
+.stage.flap-open .env-seal { opacity: 0; transform: translate(-50%, -55%) scale(.4) rotate(40deg); }
+
+.envelope-hit {
+  position: absolute;
+  inset: -8px;
+  z-index: 6;
+  cursor: pointer;
+  background: transparent;
+  border: 0;
+  padding: 0;
+  outline: none;
+  -webkit-appearance: none;
+  appearance: none;
+}
+.stage.flap-open .envelope-hit { pointer-events: none; }
+
+/* Gentle "pick me" wiggle before it's opened */
+@keyframes nudge {
+  0%, 100% { transform: translateY(0) rotate(0); }
+  10% { transform: translateY(-4px) rotate(-1.2deg); }
+  20% { transform: translateY(0) rotate(1.2deg); }
+  30% { transform: translateY(-2px) rotate(0); }
+}
+.stage.show:not(.flap-open) .env-group { animation: nudge 3.2s ease-in-out 1.5s infinite; }
+
+/* ---- Card ---- */
+.card-wrap {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: var(--card-w);
+  height: var(--card-h);
+  z-index: 2;
+  transform: translate(-50%, -50%) translate(var(--card-dx), var(--card-dy)) scale(var(--card-s));
+  transition: transform .9s cubic-bezier(.4, 0, .2, 1);
+}
+.stage.card-out  { --card-dy: -46%; }
+.stage.card-full { --card-s: 1; --card-dy: 0%; }
+
+.card {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  perspective: 1800px;
+  transform-style: preserve-3d;
+  filter: drop-shadow(0 18px 24px rgba(60, 40, 20, .35));
+  outline: none;
+}
+.card:focus-visible .card-inside { box-shadow: 0 0 0 3px var(--coral); }
+
+.card-cover, .card-inside {
+  position: absolute;
+  inset: 0;
+  border-radius: 4px 10px 10px 4px;
+}
+
+.card-inside {
+  z-index: 1;
+  background: #fffaf0 url("textured-paper.png") center / cover;
+  overflow: hidden;
+}
+/* spine shading */
+.card-inside::before {
+  content: "";
+  position: absolute;
+  left: 0; top: 0; bottom: 0; width: 14%;
+  background: linear-gradient(to right, rgba(80, 50, 20, .18), rgba(80, 50, 20, 0));
+  pointer-events: none;
+  z-index: 2;
+}
+
+.card-cover {
+  z-index: 2;
+  transform-origin: left center;
+  transform-style: preserve-3d;
+  transition: transform 1.3s cubic-bezier(.3, .9, .35, 1);
+  cursor: pointer;
+}
+.card.open .card-cover { transform: rotateY(-180deg); }
+
+.cover-front, .cover-back {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  overflow: hidden;
+}
+.cover-back { transform: rotateY(180deg); }
+
+/* ---- Cover front design (CSS only; drop in birthday2026.png to override) ---- */
+.cover-front {
+  background: #fffaf0 url("textured-paper.png") center / cover;
+  color: #5a3f24;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 12%;
+}
+/* printed double frame, like real card stock */
+.cover-front::before {
+  content: "";
+  position: absolute;
+  inset: 5%;
+  border: 1.5px solid rgba(201, 160, 100, .75);
+  outline: 1px solid rgba(201, 160, 100, .35);
+  outline-offset: 4px;
+  border-radius: 2px;
+  pointer-events: none;
+}
+.cover-front .cover-eyebrow {
+  font-size: calc(var(--cu) * 3.8);
+  letter-spacing: .3em;
+  text-indent: .3em;
+  text-transform: uppercase;
+  color: #b08968;
+}
+.cover-front h2 {
+  font-size: calc(var(--cu) * 15);
+  line-height: .95;
+  margin-top: .3rem;
+  color: #5a3f24;
+}
+.cover-front .cover-name {
+  margin-top: .5rem;
+  font-size: calc(var(--cu) * 9);
+  font-family: "Kalam", cursive;
+  font-weight: 700;
+  color: var(--coral);
+}
+.cover-front .cover-rule {
+  width: 28%;
+  height: 1.5px;
+  margin: 7% auto 0;
+  background: linear-gradient(90deg, transparent, rgba(201, 160, 100, .9), transparent);
+}
+.cover-front .cover-deco {
+  margin-top: 6%;
+  font-size: calc(var(--cu) * 9);
+  letter-spacing: .2em;
+  text-indent: .2em;
+}
+.cover-front .cover-year {
+  position: absolute;
+  right: 9%;
+  top: 7.5%;
+  font-family: "Roboto Mono", monospace;
+  font-size: max(9px, calc(var(--cu) * 3));
+  color: #b08968;
+}
+/* optional artwork */
+.cover-front .cover-art {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 3;
+}
+
+/* ---- Cover back (left inside page on wide screens) ---- */
+.cover-back {
+  background: #fffaf0 url("textured-paper.png") center / cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: var(--ink-soft);
+  padding: 10%;
+}
+.cover-back::after {
+  content: "";
+  position: absolute;
+  right: 0; top: 0; bottom: 0; width: 14%;
+  background: linear-gradient(to left, rgba(80, 50, 20, .14), rgba(80, 50, 20, 0));
+  pointer-events: none;
+}
+.cover-back p { margin: 0; font-size: max(11px, calc(var(--cu) * 4.4)); line-height: 1.6; }
+.cover-back .big { font-size: calc(var(--cu) * 11); display: block; margin-bottom: .6rem; }
+
+/* ---- Inside page (the message) ---- */
+.page-content {
+  position: absolute;
+  inset: 0;
+  padding: 8% 9% 8% 15%;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+  text-align: center;
+  color: var(--ink);
+  pointer-events: none;
+  z-index: 3;
+}
+.card.open .page-content { pointer-events: auto; }
+.page-content .deco { font-size: calc(var(--cu) * 5.5); letter-spacing: .3em; text-indent: .3em; margin-bottom: .4rem; }
+.page-content h2 { font-size: calc(var(--cu) * 7.6); line-height: 1.05; color: #5a3f24; }
+.page-content p  { font-size: max(11px, calc(var(--cu) * 4.5)); line-height: 1.6; margin: .9rem 0 0; }
+.page-content .sign { margin-top: 1.1rem; font-weight: 400; }
+.page-content .placeholder { color: #b08968; font-style: italic; }
+
+/* When the two-page spread fits on screen (JS toggles .wide), slide the card
+   right by half its width so the whole spread stays centered. */
+.stage.wide.card-open { --card-dx: 50%; }
+
+/* ---- Hint under the stage ---- */
+.stage-hint {
+  position: fixed;
+  left: 50%;
+  bottom: calc(max(22px, env(safe-area-inset-bottom)) + 8px);
+  transform: translateX(-50%);
+  margin: 0;
+  padding: .45rem 1.1rem;
+  font-size: clamp(.95rem, 4vw, 1.1rem);
+  color: #5a3f24;
+  background: rgba(255, 250, 240, .75);
+  border: 1px solid rgba(90, 63, 36, .2);
+  border-radius: 999px;
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity .5s ease;
+  pointer-events: none;
+  z-index: 50;
+}
+.stage-hint.show { opacity: 1; animation: hintPulse 2.4s ease-in-out infinite; }
+@keyframes hintPulse { 0%, 100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(-3px); } }
+
+/* ------------------------------------------------------------------ */
+/* Bottom actions                                                       */
+/* ------------------------------------------------------------------ */
+.bottom-actions {
+  position: fixed;
+  right: max(14px, env(safe-area-inset-right));
+  bottom: max(14px, env(safe-area-inset-bottom));
+  display: flex;
+  gap: 8px;
+  z-index: 1500;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(16px);
+  transition: all .35s ease;
+}
+.bottom-actions.show { opacity: 1; visibility: visible; transform: translateY(0); }
+
+.action-button {
+  min-height: 44px;
+  min-width: 44px;
+  padding: 0 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-family: "Kalam", cursive;
+  font-weight: 400;
+  font-size: 14px;
+  color: var(--ink);
+  background: rgba(255, 250, 240, .95);
+  border: 2px solid var(--kraft);
+  border-radius: 999px;
+  box-shadow: 0 4px 12px rgba(60, 40, 20, .25);
+  text-decoration: none;
+  cursor: pointer;
+  transition: all .25s ease;
+}
+.action-button:hover, .action-button:focus-visible {
+  background: var(--kraft);
+  color: #fff;
+  transform: translateY(-2px);
+  outline: 2px solid var(--coral);
+  outline-offset: 2px;
+}
+.action-button.icon-only { padding: 0; width: 44px; }
+.action-button .emoji { font-size: 18px; line-height: 1; }
+
+/* ------------------------------------------------------------------ */
+/* The present (inside the card) + perks sheet                          */
+/* ------------------------------------------------------------------ */
+.gift {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .15rem;
+  margin: .9rem auto 0;
+  padding: .4rem .9rem .5rem;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  font-family: "Kalam", cursive;
+  color: #b08968;
+  -webkit-appearance: none;
+  appearance: none;
+  outline: none;
+}
+.gift:focus-visible .gift-tag { text-decoration: underline; }
+.gift-box {
+  display: block;
+  font-size: calc(var(--cu) * 17);
+  line-height: 1;
+  filter: drop-shadow(0 6px 6px rgba(60, 40, 20, .25));
+  animation: giftBounce 2.6s ease-in-out infinite;
+  transform-origin: 50% 100%;
+}
+.gift-tag {
+  font-size: max(11px, calc(var(--cu) * 3.8));
+  font-style: italic;
+}
+.gift.unwrapping .gift-box { animation: giftShake .6s ease-in-out both; }
+@keyframes giftBounce {
+  0%, 100% { transform: translateY(0) rotate(0); }
+  8%  { transform: translateY(-6px) rotate(-4deg); }
+  16% { transform: translateY(0) rotate(3deg); }
+  24% { transform: translateY(-3px) rotate(0); }
+  32% { transform: translateY(0); }
+}
+@keyframes giftShake {
+  0%   { transform: scale(1) rotate(0); }
+  20%  { transform: scale(1.1) rotate(-10deg); }
+  40%  { transform: scale(1.15) rotate(10deg); }
+  60%  { transform: scale(1.2) rotate(-8deg); }
+  80%  { transform: scale(1.3) rotate(6deg); opacity: 1; }
+  100% { transform: scale(1.6) rotate(0); opacity: 0; }
+}
+
+.modal {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  background: rgba(43, 16, 85, .65);
+  z-index: 2000;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .3s ease;
+}
+.modal[hidden] { display: none; }
+.modal.show { opacity: 1; pointer-events: auto; }
+@media (min-width: 600px) {
+  .modal { align-items: center; padding: 20px; }
+}
+
+.modal-sheet {
+  position: relative;
+  width: 100%;
+  max-width: 560px;
+  max-height: 88vh;
+  max-height: 88dvh;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+  background: var(--sand);
+  border-radius: 22px 22px 0 0;
+  padding: 26px 18px calc(22px + env(safe-area-inset-bottom));
+  transform: translateY(40px);
+  transition: transform .35s cubic-bezier(.2, .9, .3, 1);
+}
+.modal.show .modal-sheet { transform: none; }
+@media (min-width: 600px) {
+  .modal-sheet { border-radius: 22px; padding: 30px 26px; }
+}
+
+.modal-close {
+  position: absolute;
+  top: 12px; right: 12px;
+  width: 40px; height: 40px;
+  border: 0;
+  border-radius: 50%;
+  background: var(--kraft);
+  color: #fff;
+  font-size: 24px;
+  line-height: 1;
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+}
+.modal-close:focus-visible { outline: 2px solid var(--coral); }
+
+.modal-header { text-align: center; margin: 0 30px 18px; }
+.modal-emoji { font-size: 2.2rem; line-height: 1; margin-bottom: .3rem; }
+.modal-header h2 { font-size: clamp(1.5rem, 6.5vw, 2.1rem); line-height: 1.05; color: #5a3f24; }
+.modal-header p  { margin: 6px 0 0; color: var(--ink-soft); font-size: clamp(.9rem, 3.6vw, 1rem); }
+
+.perks {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.perks li {
+  background: #fffaf0;
+  border: 1.5px dashed var(--kraft);
+  border-radius: 12px;
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.perks strong { font-weight: 700; color: #5a3f24; font-size: clamp(1rem, 4.2vw, 1.1rem); }
+.perks span { color: var(--ink-soft); font-size: clamp(.88rem, 3.6vw, .98rem); line-height: 1.5; }
+.perks-fine { margin: 16px 6px 0; text-align: center; color: #b08968; font-size: clamp(.8rem, 3.3vw, .9rem); font-style: italic; }
+
+/* ------------------------------------------------------------------ */
+/* Petal shower overlay                                                 */
+/* ------------------------------------------------------------------ */
+#petal-canvas {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1800;   /* above the card and buttons, below the perks sheet */
+}
+
+/* ------------------------------------------------------------------ */
+/* Reduced motion                                                       */
+/* ------------------------------------------------------------------ */
+@media (prefers-reduced-motion: reduce) {
+  .env-group, .env-part, .env-flap, .card-wrap, .card-cover, .env-seal, .stage, .intro {
+    transition-duration: .25s !important;
+  }
+  .stage.show:not(.flap-open) .env-group,
+  .stage-hint.show,
+  .intro-message { animation: none !important; }
+}
+
+/* Short/landscape phones: keep the envelope on screen */
+@media (max-height: 540px) {
+  :root { --card-w: min(82vw, 400px, calc(78vh / 1.4)); }
+  .intro-overlay { padding-top: 3vh; }
+}
+  </style>
+</head>
+<body>
+
+  <!-- ========== Screen 1: String a lei ========== -->
+  <section id="intro" class="intro" aria-label="String a lei to continue">
+    <canvas id="intro-canvas" aria-hidden="true"></canvas>
+    <div class="intro-overlay">
+      <h1 class="intro-title">Aloha! 🌺</h1>
+      <p class="intro-sub">Catch flowers for your lei!</p>
+      <p id="intro-progress" class="intro-progress" aria-live="polite">0 of 6 flowers</p>
+    </div>
+    <button id="skip-intro" class="intro-skip" aria-label="Skip the intro and go to the card">Skip →</button>
+  </section>
+
+  <!-- ========== Screen 2 & 3: Envelope and card ========== -->
+  <section id="stage" class="stage" aria-hidden="true">
+    <div class="env-group" id="env-group">
+      <div class="env-part env-back"></div>
+
+      <div class="card-wrap" id="card-wrap">
+        <div class="card" id="card" aria-expanded="false">
+          <div class="card-cover" id="card-cover" role="button" tabindex="-1" aria-label="Open the card">
+            <div class="cover-front">
+              <h2>Happy 30th Birthday!</h2>
+              <br>
+              <span class="cover-eyebrow">(for the second time)</span>
+
+              <div class="cover-rule" aria-hidden="true"></div>
+              <!-- Optional: add birthday/birthday2026.png and it will cover the CSS design above. -->
+              <img class="cover-art" src="birthday2026.png" alt="" onerror="this.remove()">
+            </div>
+            <div class="cover-back" aria-hidden="true">
+              <p><span class="big">♥️</span>with love</p>
+            </div>
+          </div>
+
+          <div class="card-inside">
+            <div class="page-content" id="card-content" tabindex="0">
+              <div class="deco" aria-hidden="true">🎂</div>
+              <h2>Happy Birthday Mom!</h2>
+              <p>Congrats on making it 60 years around the sun!</p>
+              <p>I've collected a list of all the places you now qualify for a senior discount at so you don't have to!</p>
+              <button class="gift" id="gift" aria-label="Unwrap your present" aria-haspopup="dialog">
+                <span class="gift-box" aria-hidden="true">🎁</span>
+                <span class="gift-tag">tap to unwrap</span>
+              </button>
+              <p>All jokes aside, I can't wait to come check out your new place in December and explore the big island with you!</p>
+              <p>I'm happy your 60th will be the year you finally get to fulfill your dream of being a grandma!</p>
+              <p>Enjoy Hilo and hopefully you don't see any one you know.</p>
+              <p class="sign">Love you and happy birthday!<br>— Chris</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="env-part env-front">
+        <span class="env-to">To Mom</span>
+      </div>
+      <div class="env-part env-flap"></div>
+      <div class="env-seal" aria-hidden="true">♥️</div>
+      <button class="envelope-hit" id="envelope" aria-label="Open the envelope"></button>
+    </div>
+  </section>
+
+  <p class="stage-hint" id="stage-hint" aria-live="polite"></p>
+
+  <!-- ========== Bottom actions (visible once the card is open) ========== -->
+  <div class="bottom-actions" id="bottom-actions">
+    <button class="action-button icon-only" id="petals-button" aria-label="Shower of petals" title="Petals!">
+      <span class="emoji" aria-hidden="true">🌺</span>
+    </button>
+    <a class="action-button" href="archives.html" aria-label="See past birthday cards">
+      <span class="emoji" aria-hidden="true">📚</span> Archives
+    </a>
+  </div>
+
+  <!-- ========== The present: senior discount perks ========== -->
+  <div class="modal" id="perks-modal" role="dialog" aria-modal="true" aria-labelledby="perks-title" hidden>
+    <div class="modal-sheet">
+      <button class="modal-close" id="perks-close" aria-label="Close">×</button>
+      <div class="modal-header">
+        <div class="modal-emoji" aria-hidden="true">🎉</div>
+        <h2 id="perks-title">Welcome to the Senior Discount Club</h2>
+        <p>Perks that unlock the day you turn 60</p>
+      </div>
+      <ul class="perks">
+        <li><strong>Kohl's</strong><span>15% off qualifying in-store purchases every Wednesday once you turn 60.</span></li>
+        <li><strong>Goodwill</strong><span>Many regional thrift locations offer a senior discount (often around 10% off on a designated day) starting at age 60.</span></li>
+        <li><strong>Compare Foods Supermarket</strong><span>10% discount every Wednesday for shoppers aged 60 and older.</span></li>
+        <li><strong>Harris Teeter</strong><span>5% discount on Thursdays for senior shoppers aged 60 and older.</span></li>
+        <li><strong>Albertsons / Bi-Lo</strong><span>Select locations provide a 5% to 10% senior discount starting at age 60 (often on the first Wednesday of the month or designated days, varying by region).</span></li>
+        <li><strong>Applebee's</strong><span>Many franchise locations offer a 10% to 15% discount or a specialized senior menu for customers aged 60 and older.</span></li>
+        <li><strong>El Pollo Loco</strong><span>10% senior discount for customers aged 60 and older.</span></li>
+        <li><strong>Ben &amp; Jerry's</strong><span>Select scoop shops extend a 10% discount to patrons aged 60 and older.</span></li>
+        <li><strong>AMC Theatres &amp; Regal Cinemas</strong><span>Senior ticket pricing starting at age 60.</span></li>
+        <li><strong>Marcus Theatres</strong><span>Discounted senior ticket rates (such as special Friday matinee pricing) for guests aged 60 and older.</span></li>
+      </ul>
+      <p class="perks-fine">Discounts vary by location — worth asking at the register. Happy saving! 💸</p>
+    </div>
+  </div>
+
+  <canvas id="petal-canvas" aria-hidden="true"></canvas>
+
+  <script src="../assets/js/birthday-2026.js" defer></script>
+</body>
+</html>
